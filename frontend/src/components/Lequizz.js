@@ -31,7 +31,12 @@ const Lequizz = ( { lequizz } ) => {
                 lequizz.activation==='finis' ? <button type="button" class="btn btn-outline-danger">Finis</button> :
                 <button type="button" class="btn btn-outline-warning">Non Commencé</button>)
             }
-            </Card.Text>      
+            </Card.Text>     
+            <Card.Text className='card-text text-center p-1'>
+            <button disabled={lequizz.activation==='encours' || lequizz.activation==='finis'} class="badge rounded-pill bg-light">Editer</button>
+            <button disabled={lequizz.activation==='encours' } class="badge rounded-pill bg-danger ">Supprimer</button>
+            <button id='view' class="badge rounded-pill bg-primary">Visionner</button>
+            </Card.Text> 
         </Card>
         </Container>
     )

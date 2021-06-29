@@ -6,6 +6,7 @@ import { Container, } from 'react-bootstrap'
 import HomeScreen from './screens/HomeScreen'
 import QuizScreen from './screens/QuizScreen'
 import QuizzDetailScreen from './screens/QuizzDetailScreen'
+import UsersScreen from './screens/UsersScreen'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path='/' component={HomeScreen} exact/>
           <Route path='/admin/myquizz' component={QuizScreen} exact/>
           <Route path='/admin/myquizz/:id' component={QuizzDetailScreen} exact/>
+          <Route path='/admin/utilisateurs' component={UsersScreen} exact/>
         </Container>
       </main>
       <Footer /> 
