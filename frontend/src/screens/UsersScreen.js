@@ -1,11 +1,23 @@
 import React from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Table, Button } from 'react-bootstrap'
+import { Table, Button, Row, Col,} from 'react-bootstrap'
 
 const UsersScreen = () => {
     return (
         <>
- <Table striped bordered hover responsive className='table-sm'>
+        <Row>
+         <h1 className='text-center mb-3'><strong> Mes Utilisateurs </strong> </h1>
+     </Row>
+     <Row>
+         <Col></Col>
+         <Col></Col>
+         <Col></Col>
+        <Col>       
+             <button className ='btn btn-outline-light btn-sm ' >
+            <i className='fas fa-plus '></i> Créer Utilisateur
+            </button></Col>
+    </Row>
+     <Table striped bordered hover responsive className='table-sm mt-4'>
           <thead>
             <tr>
               <th>ID</th>
@@ -20,7 +32,7 @@ const UsersScreen = () => {
                 <td>user._id</td>
                 <td>user.name</td>
                 <td>
-                  <a href='#'>user.email</a>
+                  <a href='#home'>user.email</a>
                 </td>
                 <td>
                 admin ou pas

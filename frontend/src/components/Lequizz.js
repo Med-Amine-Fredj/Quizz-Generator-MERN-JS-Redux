@@ -19,23 +19,29 @@ const Lequizz = ( { lequizz } ) => {
             </Link>               
             </Card.Body>   
             <Card.Text as='div' >
-                <div className='my-3'>
-                    {lequizz.description}
+                <div className='my-3'  >
+                {lequizz.description.length > 60 ?
+                    (
+                    <div>
+                        {`${lequizz.description.substring(0, 60)}...`}
+                    </div>
+                    ) :
+                    <p>{lequizz.description}</p> }
                 </div>    
             </Card.Text>  
             <Card.Text as='h6' className='mb-3 card-text'>
                 Code Quizz : {lequizz.code}
             </Card.Text>  
             <Card.Text className='card-text text-center '>
-            {lequizz.activation==='encours' ? <button type="button" class="btn btn-outline-success">En Cours</button> : (
-                lequizz.activation==='finis' ? <button type="button" class="btn btn-outline-danger">Finis</button> :
-                <button type="button" class="btn btn-outline-warning">Non Commencé</button>)
+            {lequizz.activation==='encours' ? <button type="button" className="btn btn-outline-success">En Cours</button> : (
+                lequizz.activation==='finis' ? <button type="button" className="btn btn-outline-danger">Finis</button> :
+                <button type="button" className="btn btn-outline-warning">Non Commencé</button>)
             }
             </Card.Text>     
             <Card.Text className='card-text text-center p-1'>
-            <button disabled={lequizz.activation==='encours' || lequizz.activation==='finis'} class="badge rounded-pill bg-light">Editer</button>
-            <button disabled={lequizz.activation==='encours' } class="badge rounded-pill bg-danger ">Supprimer</button>
-            <button id='view' class="badge rounded-pill bg-primary">Visionner</button>
+            <button disabled={lequizz.activation==='encours' || lequizz.activation==='finis'} className="badge rounded-pill bg-light">Editer</button>
+            <button disabled={lequizz.activation==='encours' } className="badge rounded-pill bg-danger ">Supprimer</button>
+            <button id='view' className="badge rounded-pill bg-primary">Visionner</button>
             </Card.Text> 
         </Card>
         </Container>

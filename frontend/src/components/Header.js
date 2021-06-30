@@ -1,6 +1,6 @@
 import React from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown} from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown, Image} from 'react-bootstrap'
 
 
 const Header = () => {
@@ -23,7 +23,7 @@ const Header = () => {
                     </Nav>
                     <Nav className="ml-auto">
                         <NavDropdown title="Utilisateur En Ligne" id="basic-nav-dropdown">
-                            <NavDropdown.Item >Utilisateur1</NavDropdown.Item>
+                            <NavDropdown.Item >Utilisateur1<Image src='/images/onlinedot.png' style={{height: '20px', width: '20px', float: 'right', verticalAlign: 'center'}} ></Image></NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item>Utilisateur2</NavDropdown.Item>
                             </NavDropdown>
