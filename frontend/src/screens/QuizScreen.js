@@ -1,26 +1,33 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, } from 'react-bootstrap'
 import Lequizz from '../components/Lequizz'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { listQuizz } from '../actions/quizzActions'
 
 
 const QuizScreen = () => {
 
-    const[lesquizz, SetQuizz] = useState([])
+    const dispatch = useDispatch()
+
+    const quizzList = useSelector(state => state.quizzList)
+
+    const { loading, error, quizz } = quizzList
 
     useEffect(() => {
-        const fetchQuizz = async () => {
-           const { data } =  await axios.get('/admin/myquizz')
-           SetQuizz(data)
-        }
-        fetchQuizz()
-    }, [])
+        dispatch(listQuizz())
+    }, [dispatch])
 
+    
     return (
         <>
-                    <Row>
+    
+    <Row>
          <h1 className='text-center mb-3'><strong> Mes QuizZ </strong> </h1>
-     </Row>
+         
+    </Row>
+
      <Row>
          <Col></Col>
          <Col></Col>
@@ -34,15 +41,17 @@ const QuizScreen = () => {
             <i className='fas fa-plus '></i> Créer QuizZ
             </button></Col>
     </Row>
-            <Row >
-                {lesquizz.map((lequizz) => (
+    { loading ? <Loader />: error ? <Message variant='alert m-3 alert-danger'>{error}</Message> : 
+                <Row >
+                {quizz.map((lequizz) => (
                     <Col key={lequizz._id} sm={12} md={6} lg={4} xl={3}  >
                         <Lequizz  lequizz={lequizz} />
                     </Col>
                 ))}
             </Row>
-
+}
     </>
+
     )
 }
 
