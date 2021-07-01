@@ -8,29 +8,29 @@ const Lequizz = ( { lequizz } ) => {
         <Container>
         <Card className='card border-dark mt-3 mb-3 p-3 text-white'>
             <Link to={`/admin/myquizz/${lequizz._id}`}>
-                <Card.Img style={{height: '9rem'}} src={lequizz.image} variant='top' />
+                <Card.Img style={{height: '9rem'}} src={lequizz.imageQuizz} variant='top' />
             </Link>
             <Card.Body className='text-center'>
             <Link to={`/admin/myquizz/${lequizz._id}`} className= 'card-title'>
                 <Card.Title as='div'  />
-                <h4> <strong > {lequizz.nomquizz} </strong>
+                <h4> <strong > {lequizz.nomQuizz} </strong>
                 </h4>
                
             </Link>               
             </Card.Body>   
             <Card.Text as='div' >
                 <div className='my-3'  >
-                {lequizz.description.length > 60 ?
+                {lequizz.descriptionQuizz.length > 60 ?
                     (
                     <div>
-                        {`${lequizz.description.substring(0, 60)}...`}
+                        {`${lequizz.descriptionQuizz.substring(0, 60)}...`}
                     </div>
                     ) :
-                    <p>{lequizz.description}</p> }
+                    <p>{lequizz.descriptionQuizz}</p> }
                 </div>    
             </Card.Text>  
             <Card.Text as='h6' className='mb-3 card-text'>
-                Code Quizz : {lequizz.code}
+                Code Quizz : {lequizz.codeQuizz}
             </Card.Text>  
             <Card.Text className='card-text text-center '>
             {lequizz.activation==='encours' ? <button type="button" className="btn btn-outline-success">En Cours</button> : (
