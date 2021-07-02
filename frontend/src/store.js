@@ -1,10 +1,11 @@
 import { createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { quizzListReducers,  } from './reducers/quizzReducers'
+import { quizzListReducers, quizzDetailsReducers  } from './reducers/quizzReducers'
 
 const reducer = combineReducers({
     quizzList: quizzListReducers,
+    quizzDetails: quizzDetailsReducers
     
 })
 

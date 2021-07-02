@@ -17,7 +17,7 @@ const reponseQuestionSchema = mongoose.Schema({
 })
 
 const questionSchema = mongoose.Schema({
-    utilisateur: {
+    quizzId: {
         type: mongoose.Schema.Types.ObjectId,
         require: true,
         ref: 'Quizz'
