@@ -30,6 +30,10 @@ const questionSchema = mongoose.Schema({
         type : String,
         require: true,
     },
+    tempsQuestion: {
+        type : String,
+        require: true,
+    },
     choixQuestion: [choixQuestionSchema],
     reponseQuestion: [reponseQuestionSchema],
    
