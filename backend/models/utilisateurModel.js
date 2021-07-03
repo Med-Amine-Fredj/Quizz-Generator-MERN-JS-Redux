@@ -34,6 +34,13 @@ utilisateursSchema.methods.matchMdp = async function(enterdedPassword) {
     return await bcrypt.compare(enterdedPassword, this.mdp)
 }
 
+utilisateursSchema.pre('save', async function (next) {
+    if (!this.isModified('mdp')) {
+      next()
+    }
+    const salt = await bcrypt.genSalt(10)
+    this.mdp = await bcrypt.hash(this.mdp, salt)
+  })
 const Utilisateurs = mongoose.model('Utilisateurs', utilisateursSchema) 
 
 export default Utilisateurs

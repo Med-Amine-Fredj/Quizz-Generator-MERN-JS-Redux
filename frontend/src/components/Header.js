@@ -1,9 +1,22 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Navbar, Nav, Container, NavDropdown, Image} from 'react-bootstrap'
-
+import { logout } from '../actions/userActions'
 
 const Header = () => {
+
+    const dispatch = useDispatch()
+
+    const userLogin = useSelector(state => state.userLogin)
+
+    const { userInfo } = userLogin
+
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
+
+
     return (
         <header>
             <Navbar className='navbar navbar-expand-lg navbar-dark bg-primary' collapseOnSelect>
@@ -21,7 +34,28 @@ const Header = () => {
                             <Nav.Link ><i className='fa fa-users'></i> Mes Utilisateurs  </Nav.Link>
                         </LinkContainer>
                     </Nav>
+                    </Navbar.Collapse>
+               
+                    {userInfo ? (
+                        <Nav className="ml-auto">
+                        <NavDropdown title={userInfo.nomUtilisateur} id="basic-nav-dropdown">
+                            <LinkContainer to='/profile'>    
+                            <NavDropdown.Item ><i className='fa fa-sliders-h'></i> Gérer Compte </NavDropdown.Item>
+                            </LinkContainer>
+                            <NavDropdown.Divider />
+                            <LinkContainer to='/logout'>
+                            <NavDropdown.Item onClick={logoutHandler} ><i className='fa fa-sign-out-alt'> Se Déconnecter </i></NavDropdown.Item>
+                            </LinkContainer>
+                            </NavDropdown>
+                            </Nav>
+                    ) : 
                     <Nav className="ml-auto">
+                        <LinkContainer to='/login'>
+                            <Nav.Link ><i className='fa fa-user'></i> Se Connecter </Nav.Link>
+                        </LinkContainer>
+                    </Nav>
+                        }
+                         {/*<Nav className="ml-auto">
                         <NavDropdown title="Utilisateur En Ligne" id="basic-nav-dropdown">
                             <NavDropdown.Item >Utilisateur1<Image src='/images/onlinedot.png' style={{height: '20px', width: '20px', float: 'right', verticalAlign: 'center'}} ></Image></NavDropdown.Item>
                             <NavDropdown.Divider />
@@ -36,8 +70,8 @@ const Header = () => {
                             <NavDropdown.Item ><i className='fa fa-sign-out-alt'> Logout </i></NavDropdown.Item>
                             </LinkContainer>
                             </NavDropdown>
-                    </Nav>
-                    </Navbar.Collapse>
+                         </Nav> */}
+                
                 </Container>
             </Navbar>
         </header>

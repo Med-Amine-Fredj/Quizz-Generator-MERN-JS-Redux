@@ -51,5 +51,37 @@ const getUserProfile = asyncHandler(async(req,res) => {
  })
 
 
+ // @desc Update user profile
+// @route PUT /users/profile
+// @acess Private 
+const updateUserProfile = asyncHandler(async(req,res) => {
+    const user = await Utilisateurs.findById(req.user._id)
 
-export  { authUser, getUserProfile }
+    if(user) {
+        user.nomUtilisateur = req.body.nomUtilisateur || user.nomUtilisateur
+
+        user.emailUtilisateur = req.body.emailUtilisateur || user.emailUtilisateur
+
+        if ( req.body.mdp) {
+            user.mdp = req.body.mdp 
+        }
+
+        const updatedUser = await user.save()
+
+        res.json({
+            _id: updatedUser._id,
+            nomUtilisateur : updatedUser.nomUtilisateur,
+            emailUtilisateur: updatedUser.emailUtilisateur,
+            isAdmin: updatedUser.isAdmin,
+            token: generateToken(updatedUser._id),
+            online: true,
+        })
+    } else {
+        res.status(404)
+        throw new Error('User Not Found ! ')
+    }
+ })
+
+
+
+export  { authUser, getUserProfile, updateUserProfile }
