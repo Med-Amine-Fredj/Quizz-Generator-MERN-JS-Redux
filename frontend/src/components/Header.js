@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown, Image} from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown,} from 'react-bootstrap'
 import { logout } from '../actions/userActions'
 
 const Header = () => {
@@ -26,14 +26,20 @@ const Header = () => {
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <LinkContainer to='/admin/myquizz'>
-                            <Nav.Link> <i className='fa fa-question-circle'></i> Mes QuizZ</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to='/admin/utilisateurs'>
-                            <Nav.Link ><i className='fa fa-users'></i> Mes Utilisateurs  </Nav.Link>
-                        </LinkContainer>
-                    </Nav>
+                        { userInfo && userInfo.isAdmin && (
+                            <Nav className="me-auto">
+                            <LinkContainer to='/admin/myquizz'>
+                                <Nav.Link> <i className='fa fa-question-circle'></i> Mes QuizZ </Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to='/admin/userslist'>
+                                <Nav.Link ><i className='fa fa-users'></i> Mes Utilisateurs  </Nav.Link>
+                            </LinkContainer>
+                            <LinkContainer to='/admin/usergroups'>
+                                <Nav.Link ><i className='fa fa-users'></i> Mes Groupes </Nav.Link>
+                            </LinkContainer>
+                            </Nav>
+                        )}
+
                     </Navbar.Collapse>
                
                     {userInfo ? (
@@ -43,7 +49,7 @@ const Header = () => {
                             <NavDropdown.Item ><i className='fa fa-sliders-h'></i> Gérer Compte </NavDropdown.Item>
                             </LinkContainer>
                             <NavDropdown.Divider />
-                            <LinkContainer to='/logout'>
+                            <LinkContainer to='/'>
                             <NavDropdown.Item onClick={logoutHandler} ><i className='fa fa-sign-out-alt'> Se Déconnecter </i></NavDropdown.Item>
                             </LinkContainer>
                             </NavDropdown>

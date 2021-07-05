@@ -1,6 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import { Link, } from 'react-router-dom'
-import { Form, Row, Col, Button, } from 'react-bootstrap'
+import { Form, Button, } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message.js'
 import Loader from '../components/Loader.js'
@@ -17,7 +16,7 @@ const LoginScreen = ( { location, history } ) => {
 
     const { loading, error, userInfo } = userLogin 
 
-    const redirect = location.search ? location.search.split('=')[1] : '/admin/myquizz'
+    const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
         if(userInfo) {

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Table, Form, Button, Row, Col } from 'react-bootstrap'
-import { LinkContainer } from 'react-router-bootstrap'
+import {Form, Button, } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
@@ -36,7 +35,7 @@ const ProfileScreen = ( { history } ) => {
                 setEmail(user.emailUtilisateur)
             }
         }
-    }, [dispatch,  history, user])
+    }, [dispatch,  history, user, userInfo])
    
     const submitHandler = (e) => {
         e.preventDefault()

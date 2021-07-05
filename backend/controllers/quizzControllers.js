@@ -3,7 +3,6 @@ import Quizz from '../models/quizzModel.js'
 
 
 
-
 // @desc Fetch All Quizz
 // @route GET /admin/myquizz
 // @acess Only admin
@@ -11,6 +10,7 @@ const getQuizz = asyncHandler(async(req,res) => {
 
     const lesquizz = await Quizz.find({})
     res.json(lesquizz)
+
 })
 
 

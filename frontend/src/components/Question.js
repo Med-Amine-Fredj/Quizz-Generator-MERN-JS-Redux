@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Container, Button} from 'react-bootstrap'
+import { Card, Button} from 'react-bootstrap'
 
 
 const Question = ( { question } ) => {

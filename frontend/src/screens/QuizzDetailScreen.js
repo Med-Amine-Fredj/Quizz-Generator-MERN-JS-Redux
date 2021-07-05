@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Card, Container, Button} from 'react-bootstrap'
-import { Link, } from 'react-router-dom'
+import {Card, Container} from 'react-bootstrap'
 import Question from '../components/Question'
 import Loader from '../components/Loader'
 import Message from '../components/Message'

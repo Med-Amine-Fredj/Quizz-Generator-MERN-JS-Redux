@@ -1,13 +1,27 @@
-import React, { useState } from 'react'
-import { Alert, Button } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
 
 const Message = ({variant, children}) => {
 
-    const [show, setShow] = useState(true);
+            const [show, setShow] = useState(true);
 
-    return (
-        <>
-        <Alert variant={variant} show={show}>
+            useEffect(() => {
+                const timeId = setTimeout(() => {
+                    setShow(false)
+                }, 2000)
+                return () => {
+                    clearTimeout(timeId)
+                }
+                }, []);
+                if(!show) {
+                    return null;
+                    }
+            return (
+                <>
+
+                  <div className={`alert alert-${variant}`}>
+                {children}
+                </div>
+                    {/* <Alert variant={variant} show={show}>
             {children}
              <div className="d-flex justify-content-end ">
                 <Button onClick={() => setShow(false)} variant="outline-dark " >
@@ -16,6 +30,7 @@ const Message = ({variant, children}) => {
             </div>
         </Alert>
         {!show && <Button onClick={() => setShow(true)} className='m-4' size='sm '>Afficher Message</Button>}
+        */} 
         </>
     )
 }

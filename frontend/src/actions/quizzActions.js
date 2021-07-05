@@ -2,13 +2,24 @@ import axios from 'axios'
 import { QUIZZ_LIST_REQUEST, QUIZZ_LIST_SUCCESS, QUIZZ_LIST_FAIL, QUIZZ_DETAILS_REQUEST, QUIZZ_DETAILS_SUCCESS, QUIZZ_DETAILS_FAIL} from '../constants/quizzConstants'
 
 
-export const listQuizz = () => async(dispatch) => {
+export const listQuizz = () => async(dispatch, getState) => {
     try {
         dispatch({
             type: QUIZZ_LIST_REQUEST
         })
 
-        const { data } = await axios.get('/admin/myquizz')
+        
+
+
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers:   {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get('/myquizz',config)
 
         dispatch({
             type: QUIZZ_LIST_SUCCESS,
@@ -22,13 +33,23 @@ export const listQuizz = () => async(dispatch) => {
     }
 }
 
-export const listQuizzDetails = (id) => async(dispatch) => {
+export const listQuizzDetails = (id) => async(dispatch, getState) => {
     try {
         dispatch({
             type: QUIZZ_DETAILS_REQUEST
         })
 
-        const { data } = await axios.get(`/admin/myquizz/${id}`)
+        
+
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers:   {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get(`/myquizz/${id}`,config)
 
         dispatch({
             type: QUIZZ_DETAILS_SUCCESS,

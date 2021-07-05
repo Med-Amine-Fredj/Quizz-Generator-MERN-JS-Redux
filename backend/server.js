@@ -21,7 +21,7 @@ app.get('/',(req, res) => {
     res.send('API is running...')
 })
 
-app.use('/admin/myquizz', quizzRoutes) 
+app.use('/myquizz', quizzRoutes) 
 app.use('/users', userRoutes) 
 
 app.use(notFound)
