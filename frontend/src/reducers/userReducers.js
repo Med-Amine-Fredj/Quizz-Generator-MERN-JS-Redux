@@ -1,4 +1,33 @@
-import { USER_ADD_FAIL, USER_ADD_REQUEST, USER_ADD_RESET, USER_ADD_SUCCESS, USER_DELETE_FAIL, USER_DELETE_REQUEST, USER_DELETE_SUCCESS, USER_DETAILS_FAIL, USER_DETAILS_REQUEST, USER_DETAILS_SUCCESS, USER_LIST_FAIL, USER_LIST_REQUEST, USER_LIST_RESET, USER_LIST_SUCCESS, USER_LOGIN_FAIL, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT, USER_UPDATE_FAIL, USER_UPDATE_PROFILE_FAIL, USER_UPDATE_PROFILE_REQUEST, USER_UPDATE_PROFILE_SUCCESS, USER_UPDATE_REQUEST, USER_UPDATE_RESET, USER_UPDATE_SUCCESS } from "../constants/userConstants"
+import { USER_ADD_FAIL, 
+    USER_ADD_REQUEST, 
+    USER_ADD_RESET, 
+    USER_ADD_SUCCESS, 
+    USER_DELETE_FAIL, 
+    USER_DELETE_REQUEST, 
+    USER_DELETE_SUCCESS, 
+    USER_DETAILS_FAIL, 
+    USER_DETAILS_REQUEST, 
+    USER_DETAILS_SUCCESS, 
+    USER_LIST_FAIL, 
+    USER_LIST_REQUEST, 
+    USER_LIST_RESET, 
+    USER_LIST_SUCCESS, 
+    USER_LOGIN_FAIL, 
+    USER_LOGIN_REQUEST,
+     USER_LOGIN_SUCCESS, 
+     USER_LOGOUT,
+      USER_ONLINE_FAIL,
+       USER_ONLINE_REQUEST, 
+       USER_ONLINE_RESET, 
+       USER_ONLINE_SUCCESS, 
+       USER_UPDATE_FAIL, 
+       USER_UPDATE_PROFILE_FAIL, 
+       USER_UPDATE_PROFILE_REQUEST, 
+       USER_UPDATE_PROFILE_SUCCESS, 
+       USER_UPDATE_REQUEST, 
+       USER_UPDATE_RESET, 
+       USER_UPDATE_SUCCESS }
+        from "../constants/userConstants"
 
 export const userLoginReducer = (state = { }, action) => {
 
@@ -10,7 +39,7 @@ export const userLoginReducer = (state = { }, action) => {
         case USER_LOGIN_FAIL: 
             return{ loading: false, error: action.payload }
         case USER_LOGOUT:
-            return {} 
+            return {userInfo: action.payload } 
         default: 
             return state
 
@@ -109,6 +138,23 @@ export const userAddReducer = (state = { }, action) => {
             return{ loading: false, error: action.payload }
         case USER_ADD_RESET: 
             return { sucess: false }
+        default: 
+            return state
+
+    }
+}
+
+export const userOnlineList = (state = { usersOnline: [] }, action) => {
+
+    switch(action.type) {
+        case USER_ONLINE_REQUEST:
+            return { loading: true }
+        case USER_ONLINE_SUCCESS:
+            return { loading: false,  usersOnline: action.payload } 
+        case USER_ONLINE_FAIL: 
+            return{ loading: false, error: action.payload }
+        case USER_ONLINE_RESET: 
+            return { users: [] }
         default: 
             return state
 

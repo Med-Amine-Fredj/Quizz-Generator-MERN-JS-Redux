@@ -1,23 +1,36 @@
-import React from 'react'
+import React, {  useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getUserOnline } from '../actions/userActions'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown,} from 'react-bootstrap'
+import { Navbar, Nav, Container, NavDropdown, Image } from 'react-bootstrap'
+import Loader from '../components/Loader'
 import { logout } from '../actions/userActions'
 
-const Header = () => {
+const Header = ( { history } ) => {
 
     const dispatch = useDispatch()
+    const usersOnline = useSelector(state => state.usersOnline)
+    const {  usersOnline: users } = usersOnline
 
     const userLogin = useSelector(state => state.userLogin)
-
     const { userInfo } = userLogin
 
+    useEffect(() => {
+        if( userInfo && userInfo.isAdmin ) {
+          dispatch(getUserOnline())
+        } 
+      },[dispatch, history, userInfo])
+
     const logoutHandler = () => {
-        dispatch(logout())
+        dispatch(logout(userInfo))
     }
 
+    const reloadHandler =() => {
+        window.location.reload();
+    }
 
     return (
+        <>
         <header>
             <Navbar className='navbar navbar-expand-lg navbar-dark bg-primary' collapseOnSelect>
                 <Container>
@@ -38,10 +51,31 @@ const Header = () => {
                                 <Nav.Link ><i className='fa fa-users'></i> Mes Groupes </Nav.Link>
                             </LinkContainer>
                             </Nav>
-                        )}
+                            )}
+                        { userInfo && userInfo.isAdmin && (
+                            <Nav className="ml-auto">
+                            <NavDropdown title="Utilisateur En Ligne" id="basic-nav-dropdown" >
+                                <div style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center"
+                                    }}>
+                            <button 
+                            onClick={ reloadHandler}
+                            className='btn btn-link'> Refresh</button>
+                            </div>
+                            {(users) ? ( users.map(user => (
+                            <NavDropdown.Item key={user._id} className='mt-1'>
+                                {user.nomUtilisateur}
+                                <Image src='/images/onlinedot.png' style={{height: '20px', width: '20px', float: 'right', verticalAlign: 'center'}} >
+                                </Image>
+                            </NavDropdown.Item>
+                            ))): <Loader />}
+                            </NavDropdown>
+                            </Nav>
 
+                        )}
                     </Navbar.Collapse>
-               
                     {userInfo ? (
                         <Nav className="ml-auto">
                         <NavDropdown title={userInfo.nomUtilisateur} id="basic-nav-dropdown">
@@ -53,7 +87,7 @@ const Header = () => {
                             <NavDropdown.Item onClick={logoutHandler} ><i className='fa fa-sign-out-alt'> Se Déconnecter </i></NavDropdown.Item>
                             </LinkContainer>
                             </NavDropdown>
-                            </Nav>
+                        </Nav>
                     ) : 
                     <Nav className="ml-auto">
                         <LinkContainer to='/login'>
@@ -81,6 +115,7 @@ const Header = () => {
                 </Container>
             </Navbar>
         </header>
+        </>
     )
 }
 

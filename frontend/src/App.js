@@ -11,10 +11,13 @@ import LoginScreen from './screens/LoginScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import UserEditScreen from './screens/UserEditScreen'
 import UserAddScreen from './screens/UserAddScreen'
+import AddQuizzQuestionScreen from './screens/AddQuizzQuestionScreen'
 
 
 
 function App() {
+
+
   return (
     <Router>
       <Header />
@@ -22,6 +25,7 @@ function App() {
         <Container>
           <Route path='/login' component={LoginScreen} exact/>
           <Route path='/profile' component={ProfileScreen} exact/>
+          <Route path='/admin/myquizz/addquizz' component={AddQuizzQuestionScreen} exact/>
           <Route path='/admin/myquizz' component={QuizScreen} exact/>
           <Route path='/admin/myquizz/:id' component={QuizzDetailScreen} exact/>
           <Route path='/admin/userslist' component={UsersScreen} exact/>

@@ -14,6 +14,10 @@ import { USER_ADD_FAIL, USER_ADD_REQUEST, USER_ADD_RESET, USER_ADD_SUCCESS, USER
        USER_LOGIN_REQUEST, 
        USER_LOGIN_SUCCESS, 
        USER_LOGOUT, 
+       USER_ONLINE_FAIL, 
+       USER_ONLINE_REQUEST, 
+       USER_ONLINE_RESET, 
+       USER_ONLINE_SUCCESS, 
        USER_UPDATE_FAIL, 
        USER_UPDATE_PROFILE_FAIL, 
        USER_UPDATE_PROFILE_REQUEST, 
@@ -53,13 +57,22 @@ export const login = (emailUtilisateur, mdp ) => async (dispatch) => {
 }
 
 
-export const logout = () => (dispatch) => {
+export const logout = (user) => async  (dispatch) => {
+
+    const config = {
+        headers:   {
+            'Content-Type': 'application/json' ,
+        }
+    }
+
+    await axios.put('/logout', user, config)
 
     localStorage.removeItem('userInfo')
 
     dispatch({ type: USER_LOGOUT })
     dispatch({ type: USER_UPDATE_PROFILE_RESET })
     dispatch({ type: USER_LIST_RESET })
+    dispatch({ type: USER_ONLINE_RESET })
 }
 
 export const getUserDetails = (id) => async (dispatch, getState) => {
@@ -265,4 +278,41 @@ export const addUser = (nomUtilisateur, emailUtilisateur, mdp, isAdmin ) => asyn
       payload: message,
     })
   }
+}
+
+
+export const getUserOnline= () => async (dispatch, getState) => {
+    try {
+
+        dispatch({
+            type: USER_ONLINE_REQUEST
+        })
+
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers:   {
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        const { data } = await axios.get('/users/enligne', config)
+
+        dispatch({
+            type: USER_ONLINE_SUCCESS, 
+            payload: data,
+        })
+    } catch (error) {
+            const message =
+            error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        if (message === 'Not Authorized ! You Have To Connect With Admin' ) {
+            dispatch(logout())
+        }
+        dispatch({
+            type: USER_ONLINE_FAIL,
+            payload: message,
+        })
+        }
 }
