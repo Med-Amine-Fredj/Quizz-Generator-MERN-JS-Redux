@@ -13,6 +13,7 @@ import UserEditScreen from './screens/UserEditScreen'
 import UserAddScreen from './screens/UserAddScreen'
 import GroupeListScreen from './screens/GroupeListScreen'
 import GroupeAddScreen from './screens/GroupeAddScreen'
+import GroupeEditScreen from './screens/GroupeEditScreen'
 
 
 
@@ -28,6 +29,7 @@ function App() {
           <Route path='/profile' component={ProfileScreen} exact/>
           <Route path='/admin/myquizz' component={QuizScreen} exact/>
           <Route path='/admin/myquizz/:id' component={QuizzDetailScreen} exact/>
+          <Route path='/admin/groupes/:id/edit' component={GroupeEditScreen} exact/>
           <Route path='/admin/groupes/addgroup' component={GroupeAddScreen} exact/>
           <Route path='/admin/groupes' component={GroupeListScreen} exact/>
           <Route path='/admin/userslist' component={UsersScreen} exact/>

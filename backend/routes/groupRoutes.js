@@ -7,7 +7,7 @@ import { protect, admin } from '../middleware/authMiddleware.js'
 
 router.route('/addgroup').put(protect, admin, addGroup)
 router.route('/').get(protect, admin, getAllGroups)
-router.route('/:id').delete(protect, admin, deleteGroupe).put(protect, admin, updateGroupe).get(protect, admin, getGroupById)
+router.route('/:id').delete(protect, admin, deleteGroupe).get(protect, admin, getGroupById).put(protect, admin, updateGroupe)
 
 
 

@@ -40,8 +40,6 @@ const GroupeAddScreen = ( { history } ) => {
         if(checked) {
             nomMembres.push(checkedValue)
             emailMembres.push(checkedName)
-        } else {
-            nomMembres.pop()
         }
         };
 
@@ -99,7 +97,7 @@ const GroupeAddScreen = ( { history } ) => {
                 <Col>
                 {(users) ? ( users.map(user => (
                     <Form.Check
-                    key={user._id}
+                        key={user._id}
                         type='radio'
                         label={user.emailUtilisateur}
                         hidden

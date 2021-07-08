@@ -4,7 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { quizzListReducers, quizzDetailsReducers  } from './reducers/quizzReducers'
 import { userLoginReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userDeleteReducer, 
     userUpdateReducer, userAddReducer, userOnlineList } from './reducers/userReducers'
-import {groupesListReducers, groupeDeleteReducer, groupeAddReducer } from './reducers/groupReducers'
+import {groupesListReducers, groupeDeleteReducer, groupeAddReducer, groupDetailsReducer, groupUpdateReducer } from './reducers/groupReducers'
 
 const reducer = combineReducers({
     quizzList: quizzListReducers,
@@ -20,6 +20,9 @@ const reducer = combineReducers({
     groupesList: groupesListReducers,
     groupeDelete: groupeDeleteReducer,
     groupeAdd: groupeAddReducer,
+    groupDetails: groupDetailsReducer,
+    groupUpdate: groupUpdateReducer,
+
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null

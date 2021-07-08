@@ -77,7 +77,7 @@ const updateGroupe = asyncHandler(async(req,res) => {
 
         group.descriptionGroupe = req.body.descriptionGroupe || group.descriptionGroupe
 
-        group.nomMembres = req.body.nomMembres || group.nomMembres
+        group.nomMembres = req.body.nomMembres  || group.nomMembres
 
         group.emailMembres = req.body.emailMembres || group.emailMembres
 
