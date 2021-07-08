@@ -47,7 +47,7 @@ const Header = ( { history } ) => {
                             <LinkContainer to='/admin/userslist'>
                                 <Nav.Link ><i className='fa fa-users'></i> Mes Utilisateurs  </Nav.Link>
                             </LinkContainer>
-                            <LinkContainer to='/admin/usergroups'>
+                            <LinkContainer to='/admin/groupes'>
                                 <Nav.Link ><i className='fa fa-users'></i> Mes Groupes </Nav.Link>
                             </LinkContainer>
                             </Nav>

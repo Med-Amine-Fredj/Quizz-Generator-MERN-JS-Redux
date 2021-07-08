@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { GROUPE_LIST_RESET } from '../constants/groupConstants'
 import { USER_ADD_FAIL, USER_ADD_REQUEST, USER_ADD_RESET, USER_ADD_SUCCESS, USER_DELETE_FAIL, 
     USER_DELETE_REQUEST, 
     USER_DELETE_SUCCESS,
@@ -73,6 +74,7 @@ export const logout = (user) => async  (dispatch) => {
     dispatch({ type: USER_UPDATE_PROFILE_RESET })
     dispatch({ type: USER_LIST_RESET })
     dispatch({ type: USER_ONLINE_RESET })
+    dispatch({ type: GROUPE_LIST_RESET })
 }
 
 export const getUserDetails = (id) => async (dispatch, getState) => {

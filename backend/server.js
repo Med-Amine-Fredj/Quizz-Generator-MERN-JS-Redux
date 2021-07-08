@@ -5,6 +5,7 @@ import colors from 'colors'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import quizzRoutes from './routes/quizzRoutes.js' 
 import userRoutes from './routes/userRoutes.js' 
+import groupRoutes from './routes/groupRoutes.js'
 import { logout } from './controllers/userController.js'
 
 
@@ -25,6 +26,7 @@ app.get('/',(req, res) => {
 
 app.use('/myquizz', quizzRoutes) 
 app.use('/users', userRoutes) 
+app.use('/groupes', groupRoutes) 
 
 app.use(notFound)
 
