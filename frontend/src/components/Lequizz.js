@@ -33,9 +33,9 @@ const Lequizz = ( { lequizz } ) => {
                 Code Quizz : {lequizz.codeQuizz}
             </Card.Text>  
             <Card.Text className='card-text text-center '>
-            {lequizz.activation==='encours' ? <button type="button" className="btn btn-outline-success">En Cours</button> : (
-                lequizz.activation==='finis' ? <button type="button" className="btn btn-outline-danger">Finis</button> :
-                <button type="button" className="btn btn-outline-warning">Non Commencé</button>)
+            {lequizz.activation==='encours' ? <button type="button" className="btn btn-outline-success" disabled>En Cours</button> : (
+                lequizz.activation==='finis' ? <button type="button" className="btn btn-outline-danger" disabled>Finis</button> :
+                <button type="button" className="btn btn-outline-warning" disabled>Non Commencé</button>)
             }
             </Card.Text>     
             <Card.Text className='card-text text-center p-1'>

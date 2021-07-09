@@ -2,11 +2,6 @@ import mongoose from 'mongoose'
 
 
 const quizzSchema = mongoose.Schema({
-    utilisateur: {
-        type: mongoose.Schema.Types.ObjectId,
-        require: true,
-        ref: 'Utilisateurs'
-    },
     nomQuizz: {
         type : String,
         require: true,
@@ -21,11 +16,12 @@ const quizzSchema = mongoose.Schema({
     },
     activation: {
         type : String,
-        default: false,
+        default: "noncommencer",
     },
     codeQuizz: {
         type : Number,
         require: true,
+        unique: true,
         default: 0,
     }  
 
