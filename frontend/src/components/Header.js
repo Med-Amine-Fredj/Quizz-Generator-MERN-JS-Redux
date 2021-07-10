@@ -9,8 +9,9 @@ import { logout } from '../actions/userActions'
 const Header = ( { history } ) => {
 
     const dispatch = useDispatch()
+
     const usersOnline = useSelector(state => state.usersOnline)
-    const {  usersOnline: users } = usersOnline
+    const {  loading,  usersOnline: users } = usersOnline
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -52,7 +53,7 @@ const Header = ( { history } ) => {
                             </LinkContainer>
                             </Nav>
                             )}
-                        { userInfo && userInfo.isAdmin && (
+                        { userInfo && userInfo.isAdmin &&  (
                             <Nav className="ml-auto">
                             <NavDropdown title="Utilisateur En Ligne" id="basic-nav-dropdown" >
                                 <div style={{
@@ -64,7 +65,7 @@ const Header = ( { history } ) => {
                             onClick={ reloadHandler}
                             className='btn btn-link'> Refresh</button>
                             </div>
-                            {(users) ? ( users.map(user => (
+                            {(users && !loading) ? ( users.map(user => (
                             <NavDropdown.Item key={user._id} className='mt-1'>
                                 {user.nomUtilisateur}
                                 <Image src='/images/onlinedot.png' style={{height: '20px', width: '20px', float: 'right', verticalAlign: 'center'}} >
@@ -73,7 +74,7 @@ const Header = ( { history } ) => {
                             ))): <Loader />}
                             </NavDropdown>
                             </Nav>
-
+                        
                         )}
                     </Navbar.Collapse>
                     {userInfo ? (
@@ -95,23 +96,6 @@ const Header = ( { history } ) => {
                         </LinkContainer>
                     </Nav>
                         }
-                         {/*<Nav className="ml-auto">
-                        <NavDropdown title="Utilisateur En Ligne" id="basic-nav-dropdown">
-                            <NavDropdown.Item >Utilisateur1<Image src='/images/onlinedot.png' style={{height: '20px', width: '20px', float: 'right', verticalAlign: 'center'}} ></Image></NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item>Utilisateur2</NavDropdown.Item>
-                            </NavDropdown>
-                            <NavDropdown title="Admin Name" id="basic-nav-dropdown">
-                            <LinkContainer to='/admin/compte'>    
-                            <NavDropdown.Item ><i className='fa fa-sliders-h'></i> Gérer Compte </NavDropdown.Item>
-                            </LinkContainer>
-                            <NavDropdown.Divider />
-                            <LinkContainer to='/logout'>
-                            <NavDropdown.Item ><i className='fa fa-sign-out-alt'> Logout </i></NavDropdown.Item>
-                            </LinkContainer>
-                            </NavDropdown>
-                         </Nav> */}
-                
                 </Container>
             </Navbar>
         </header>

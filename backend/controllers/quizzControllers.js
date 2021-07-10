@@ -126,7 +126,7 @@ const addQuestion = asyncHandler(async(req,res) => {
         }
     } else {
         res.status(400)
-        throw new Error('Quizz Not Foind !')
+        throw new Error('Quizz Not Foind ! ')
     }
 
   
@@ -140,7 +140,7 @@ const getQuestionByQuizzId = asyncHandler(async(req,res) => {
 
     const quizzId = req.params.id
 
-    const questin = await Question.find().where("quizzId",quizzId)
+    const questin = await Question.find({}).where("quizzId",quizzId)
 
     if (questin) {
         res.json(questin)

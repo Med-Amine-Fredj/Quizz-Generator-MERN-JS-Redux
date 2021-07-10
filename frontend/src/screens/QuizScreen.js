@@ -13,6 +13,9 @@ const QuizScreen = () => {
 
     const quizzList = useSelector(state => state.quizzList)
 
+    const quizzDelete = useSelector(state => state.quizzDelete)
+    const { loading: loadingDelete, error: errorDelete, sucess} = quizzDelete
+
     const { loading, error, quizz } = quizzList
 
     useEffect(() => {
@@ -41,15 +44,16 @@ const QuizScreen = () => {
             <i className='fas fa-plus '></i> Créer QuizZ
             </button></Col>
     </Row>
-    { loading ? <Loader />: error ? <Message variant='alert m-3 alert-danger'>{error}</Message> : 
+    { loading && loadingDelete ? <Loader />: error && errorDelete ? <Message variant='alert m-3 alert-danger'>{error}</Message> : 
                 <Row >
                 {quizz.map((lequizz) => (
                     <Col key={lequizz._id} sm={12} md={6} lg={4} xl={3}  >
                         <Lequizz  lequizz={lequizz} />
                     </Col>
                 ))}
-            </Row>
-}
+            </Row> 
+    }
+    {sucess && window.location.reload() }
     </>
 
     )

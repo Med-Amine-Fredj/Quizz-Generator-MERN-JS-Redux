@@ -1,14 +1,17 @@
 import { createStore, combineReducers, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { quizzListReducers, quizzDetailsReducers  } from './reducers/quizzReducers'
+import { quizzListReducers, quizzDetailsReducers, quizzDeleteReducer, questionListReducer } from './reducers/quizzReducers'
 import { userLoginReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userDeleteReducer, 
     userUpdateReducer, userAddReducer, userOnlineList } from './reducers/userReducers'
-import {groupesListReducers, groupeDeleteReducer, groupeAddReducer, groupDetailsReducer, groupUpdateReducer } from './reducers/groupReducers'
+import {groupesListReducers, groupeDeleteReducer, groupeAddReducer, groupDetailsReducer, groupUpdateReducer,} from './reducers/groupReducers'
 
 const reducer = combineReducers({
     quizzList: quizzListReducers,
     quizzDetails: quizzDetailsReducers,
+    quizzDelete: quizzDeleteReducer,
+    questionList: questionListReducer,
+
     userLogin: userLoginReducer,
     userDetails: userDetailsReducer,
     userUpdateProfile: userUpdateProfileReducer,
