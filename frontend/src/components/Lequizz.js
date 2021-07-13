@@ -39,15 +39,16 @@ const Lequizz = ( { lequizz, history } ) => {
     return (
         <Container>
         {loading || loadingStart || loadingStop ? <Loader /> : error || errorStart || errorStop ? <Message varaint='danger'>{error}</Message> : (
-        <Card className='card border-dark mt-3 mb-3 p-3 text-white' style={{height: '500px'}}>
+        <Card className='card border-secondary mt-3 mb-3 p-3 ' style={{height: '500px'}}>
             <Link to={`/admin/myquizz/${lequizz._id}`}>
-                <Card.Img style={{height: '9rem'}} src={lequizz.imageQuizz} variant='top' />
+                <Card.Img style={{height: '9rem' }} 
+                className='card border-light'
+                src={lequizz.imageQuizz} variant='top' />
             </Link>
             <Card.Body className='text-center'>
-            <Link to={`/admin/myquizz/${lequizz._id}`} className= 'card-title'>
                 <Card.Title as='div'  />
-                <h4> <strong > {lequizz.nomQuizz} </strong>
-                </h4>
+                <h3 style={{color: '#21662F'}}> <strong > {lequizz.nomQuizz.toUpperCase()} </strong>
+                </h3>
                 {lequizz.activation==='encours' ? 
                 <Badge pill className="bg-success" text="dark">
                     En Cours
@@ -59,9 +60,7 @@ const Lequizz = ( { lequizz, history } ) => {
                 <Badge pill className="bg-warning" text="dark">
                     Non Commencé
                 </Badge>)
-            }
-
-            </Link>               
+            }            
             </Card.Body>   
             <Card.Text as='div' >
                 <div className='my-3'  >
@@ -84,7 +83,7 @@ const Lequizz = ( { lequizz, history } ) => {
                 Arrêter 
             </button> : (
             lequizz.activation==='finis' ? 
-            <button type="button" className="btn btn-outline-info" > 
+            <button type="button" className="btn btn-outline-warning" > 
                 Voir Résultats
             </button> :
             <button  className="btn btn-outline-success" 
@@ -95,16 +94,23 @@ const Lequizz = ( { lequizz, history } ) => {
             </Card.Text>     
             <Card.Text className='card-text text-center p-1'>
             <Link to={`/admin/myquizz/${lequizz._id}`}>
-            <Button id='view' variant='info' className='btn-sm'>
+            <Button id='view'
+                variant='btn-sm btn-outline-info m-1' 
+                className='btn-sm btn-sm btn-outline-info'>
                 <i className='fas fa-eye'></i>
             </Button>
             </Link>
             <LinkContainer to ={`myquizz/${lequizz._id}/edit`}>
-            <Button disabled={lequizz.activation==='encours' || lequizz.activation==='finis'} variant='light' className='btn-sm' >
+            <Button disabled={lequizz.activation==='encours' || lequizz.activation==='finis'} 
+                variant='btn-sm btn-outline-dark m-1' 
+                className='btn-sm btn-sm btn-outline-dark' >
                 <i className='fas fa-edit'></i>
             </Button>
             </LinkContainer>
-            <Button disabled={lequizz.activation==='encours' } variant='danger' className='btn-sm' onClick = {() => deleteHandler(lequizz._id)}>
+            <Button disabled={lequizz.activation==='encours' } 
+                variant='btn-sm btn-outline-danger m-1' 
+                className='btn-sm btn-sm btn-outline-danger'
+            onClick = {() => deleteHandler(lequizz._id)}>
                 <i className='fas fa-trash'></i>
             </Button>
             </Card.Text> 

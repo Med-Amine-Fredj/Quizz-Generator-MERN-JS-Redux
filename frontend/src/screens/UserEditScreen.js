@@ -52,11 +52,13 @@ const UserEditScreen = ({ match, history }) => {
 
   return (
     <>
-      <Link to='/admin/userslist' className='btn btn-primary my-3'>
-        Go Back
+      <Link to='/admin/userslist' >
+        <button className='btn btn-outline-primary btn-sm'>
+            Go Back
+        </button>
       </Link>
       <FormContainer>
-      <h1 className='text-center mb-3'><strong> Editer Utilisateur </strong> </h1>
+      <h1 className='text-center mb-3' style={{color: '#11246F'}}><strong> Editer Utilisateur </strong> </h1>
       {message && <Message variant='danger mt-2' > { message }</Message>}
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
@@ -67,38 +69,41 @@ const UserEditScreen = ({ match, history }) => {
         ) : (
           <Form onSubmit={submitHandler}>
             <Form.Group controlId='nomUtilisateur' className='mt-4'>
-              <Form.Label>Nom Utilisateur : </Form.Label>
+              <Form.Label> <strong>Nom Utilisateur :</strong> </Form.Label>
               <Form.Control
                 type='name'
                 placeholder='Entrer Nom'
                 value={nomUtilisateur}
                 onChange={(e) => setName(e.target.value)}
+                required
               ></Form.Control>
             </Form.Group>
 
             <Form.Group controlId='emailUtilisateur' className='mt-4'>
-              <Form.Label>Addresse Email : </Form.Label>
+              <Form.Label> <strong>Addresse Email :</strong> </Form.Label>
               <Form.Control
                 type='email'
                 placeholder='Entrer Email'
                 value={emailUtilisateur}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               ></Form.Control>
             </Form.Group>
 
             <Form.Group controlId='mdp' className='mt-4' >
-                    <Form.Label> Mot de Passe :</Form.Label>
+                    <Form.Label>  <strong>Mot de Passe :</strong></Form.Label>
                     <Form.Control  type='password'
                      placeholder='Entrer Votre Mot de passe' 
-                     value={mdp} onChange={(e) => setPassword(e.target.value)}>
+                     value={mdp} onChange={(e) => setPassword(e.target.value)}
+                     required>
                      </Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='confirmMdp' className='mt-4' >
-                    <Form.Label> confirmer Mot de Passe :</Form.Label>
+                    <Form.Label> <strong>confirmer Mot de Passe :</strong></Form.Label>
                     <Form.Control  type='password' 
                     placeholder='Confirmer Votre Mot de passe' 
-                    value={confirmMdp} onChange={(e) => setConfirmPassword(e.target.value)}>
+                    value={confirmMdp} onChange={(e) => setConfirmPassword(e.target.value)} required>
                     </Form.Control>
                 </Form.Group>
 

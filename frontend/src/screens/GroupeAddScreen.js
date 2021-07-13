@@ -51,35 +51,39 @@ const GroupeAddScreen = ( { history } ) => {
 
     return (
         <>
-        <Link to='/admin/groupes' className='btn btn-primary my-3'>
+        <Link to='/admin/groupes'>
+          <button className='btn btn-outline-primary btn-sm'>
             Go Back
+            </button>
         </Link>
       <FormContainer>
-      <h1 className='text-center mb-3'><strong> Ajouter Utilisateur </strong> </h1>
+      <h1 className='text-center mb-3' style={{color: '#11246F'}} ><strong> Ajouter Groupe </strong> </h1>
             {error && <Message variant='danger mt-2'>{error}</Message>}
             {sucess && <Message variant='success mt-2'>Groupe Created !</Message>}
             {loading && <Loader/>   }
           <Form onSubmit={submitHandler}>
             <Form.Group controlId='nomGroupe' className='mt-4'>
-              <Form.Label>Nom Groupe : </Form.Label>
+              <Form.Label><strong>Nom Groupe :</strong> </Form.Label>
               <Form.Control
                 type='name'
                 placeholder='Entrer Nom'
                 onChange={(e) => setName(e.target.value)}
+                required
               ></Form.Control>
             </Form.Group>
 
             <Form.Group controlId='descriptionGroupe' className='mt-4'>
-              <Form.Label>Description Groupe : </Form.Label>
+              <Form.Label><strong>Description Groupe :</strong> </Form.Label>
               <Form.Control
                 type='text'
                 placeholder='Entrer Description'
                 onChange={(e) => setEmail(e.target.value)}
+                required
               ></Form.Control>
             </Form.Group>
 
             <Form.Group controlId='nomMembres' className='mt-4'>
-            <Form.Label>Choix des Utilisateurs : </Form.Label>
+            <Form.Label> <strong>Choix des Utilisateurs :</strong> </Form.Label>
             <Row>
                 <Col>
                     {(users) ? ( users.map(user => (

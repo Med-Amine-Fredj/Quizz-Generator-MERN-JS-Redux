@@ -31,25 +31,31 @@ const LoginScreen = ( { location, history } ) => {
 
 
     return (
-        <FormContainer>
-            <h1 className='text-center mt-5'>Se Connecter</h1>
+        <>
+            <h1 className='text-center mt-5' style={{color: '#11246F'}}><strong>Se Connecter</strong></h1>
             {error && <Message variant='danger'>{error}</Message>}
             {loading && <Loader/>   }
+            <FormContainer>
             <Form onSubmit={submitHandler} className='mt-4'>
                 <Form.Group controlId='emailUtilisateur' >
-                    <Form.Label> Addresse Email :</Form.Label>
-                    <Form.Control  type='email' placeholder='Entrer Votre Email' value={emailUtilisateur} onChange={(e) => setEmail(e.target.value)}></Form.Control>
+                    <Form.Label> <strong>Addresse Email :</strong></Form.Label>
+                    <Form.Control  type='email' placeholder='Entrer Votre Email' value={emailUtilisateur} onChange={(e) => setEmail(e.target.value)}
+                    required>
+
+                    </Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='mdp'className='mt-4' >
-                    <Form.Label> Mot De Passe :</Form.Label>
-                    <Form.Control type='password' placeholder='Entrer Votre Mot de passe' value={mdp} onChange={(e) => setMdp(e.target.value)}></Form.Control>
+                    <Form.Label> <strong>Mot De Passe :</strong></Form.Label>
+                    <Form.Control type='password' placeholder='Entrer Votre Mot de passe' value={mdp} onChange={(e) => setMdp(e.target.value)}
+                    required></Form.Control>
                 </Form.Group>
                 <Button type='Submit' variant='primary' className='mt-4'>
                     Se Connecter
                 </Button>
             </Form>
         </FormContainer>
+        </>
     )
 }
 

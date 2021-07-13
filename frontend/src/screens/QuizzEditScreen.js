@@ -90,7 +90,7 @@ const QuizzEditScreen = ({ match, history }) => {
         Go Back
         </Link>
         <FormContainer>
-        <h1 className='text-center mb-3'><strong> Editer Quizz</strong> </h1>
+        <h1 className='text-center mb-3' style={{color: '#11246F'}}><strong> Editer Quizz</strong> </h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (
@@ -106,6 +106,7 @@ const QuizzEditScreen = ({ match, history }) => {
                   placeholder='Entrer Nom '
                   value={nomQuizz}
                   onChange={(e) => setNomQuizz(e.target.value)}
+                  required
                 ></Form.Control>
               </Form.Group>
 
@@ -117,6 +118,7 @@ const QuizzEditScreen = ({ match, history }) => {
                   placeholder='Entrer Description'
                   value={descriptionQuizz}
                   onChange={(e) => setDescQuizz(e.target.value)}
+                  required
                 ></Form.Control>
               </Form.Group>
 

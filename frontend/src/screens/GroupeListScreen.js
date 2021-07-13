@@ -39,7 +39,7 @@ const GroupeListScreen = ( { history } ) => {
     return (
         <>
                   <Row>
-         <h1 className='text-center mb-3'><strong> Mes Groupes </strong> </h1>
+         <h1 className='text-center mb-3' style={{color: '#11246F'}}><strong> Mes Groupes </strong> </h1>
          
         </Row>
      <Row>
@@ -49,7 +49,7 @@ const GroupeListScreen = ( { history } ) => {
          
         <Col> 
         <LinkContainer to='/admin/groupes/addgroup'>  
-             <button className ='btn btn-outline-light btn-sm ' >
+             <button className ='btn btn-outline-success btn-sm ' >
             <i className='fas fa-plus '></i> Créer Groupe
             </button>
             </LinkContainer> 
@@ -76,15 +76,16 @@ const GroupeListScreen = ( { history } ) => {
                 <td className=''>
                   { groupe.nomMembres.length}
                 </td>
-                <td>
+                <td style={{textAlign: 'center'}}>
                   <LinkContainer to ={`groupes/${groupe._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
+                    <Button variant='btn-sm btn-outline-dark m-1' 
+                    className='btn-sm btn-sm btn-outline-dark'>
                       <i className='fas fa-edit'></i>
                     </Button>
                   </LinkContainer>
                   <Button
-                    variant='danger'
-                    className='btn-sm'
+                    variant='btn-outline-danger'
+                    className='btn-sm btn-outline-danger'
                     onClick = {() => deleteHandler(groupe._id)}
                   >
                     <i className='fas fa-trash'></i>

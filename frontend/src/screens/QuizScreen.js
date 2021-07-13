@@ -48,7 +48,7 @@ const QuizScreen = ( { history } ) => {
     return (
         <>
             <Row>
-                <h1 className='text-center mb-3'><strong> Mes QuizZ </strong> </h1>
+                <h1 className='text-center mb-3' style={{color: '#11246F'}}><strong> Mes QuizZ </strong> </h1>
             </Row>
             <Row>
                 <Col></Col>
@@ -59,7 +59,7 @@ const QuizScreen = ( { history } ) => {
                 <Col></Col>
                 <Col></Col>
                 <Col>         
-                    <button className ='btn btn-outline-light btn-sm ' onClick= {addQuizzHandler}>
+                    <button className ='btn btn-outline-success btn-sm ' onClick= {addQuizzHandler}>
                     <i className='fas fa-plus'></i> Créer Quizz</button>
                 </Col>
             </Row>

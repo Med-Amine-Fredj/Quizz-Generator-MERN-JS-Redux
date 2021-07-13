@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {Card, Container} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import {Card, Container, Row, Col} from 'react-bootstrap'
 import Question from '../components/Question'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
@@ -26,13 +27,17 @@ const QuizzDetailScreen = ({ match }) => {
      
     return (
         <>
-       
+        <Link to='/admin/myquizz'>
+            <button className='btn btn-outline-primary btn-sm'>
+            Go Back
+            </button>
+        </Link>
         { loading || loadingQ ? <Loader /> : error || errorQ ? <Message variant='danger'>{error}</Message>: (
             <Container>
-                <Card className='card border-dark mt-1 mb-1 p-3 text-white'>
+                <Card className='card border-secondary mt-4 mb-1 p-3'>
                 <Card.Body className='text-center'>
                     <Card.Title as='h1'>
-                        <strong  className='text-light'> {lequizz.nomQuizz} </strong>   
+                        <strong   style={{color: '#11246F'}}> {lequizz.nomQuizz} </strong>   
                     </Card.Title>   
                     <Card.Text className='text-center' >
                         {lequizz.activation==='encours' ? <span type="button" className="badge rounded-pill bg-success" >En Cours</span> : (
@@ -41,31 +46,45 @@ const QuizzDetailScreen = ({ match }) => {
                         }
                     </Card.Text>     
                 </Card.Body>  
-                <Card.Text as='h5' >
-                <strong  className='text-info'>Description QuizZ :  </strong> {lequizz.descriptionQuizz}
+                <Card.Text as='h5' className='mt-2'>
+                <strong  style={{color: '#21662F'}}> Description QuizZ : </strong> {lequizz.descriptionQuizz}
                 </Card.Text>  
                 <Card.Text as='h5' className='mb-3 card-text'>
-                <strong  className='text-info'> Code Quizz : </strong>{lequizz.codeQuizz}
+                <strong  style={{color: '#21662F'}}> Code Quizz : </strong>{lequizz.codeQuizz}
                 </Card.Text>  
                 {lequizz.activation==='encours' ? <button type="button" className="btn btn-outline-danger">Arrétter QuizZ</button> : (
-                    lequizz.activation==='finis' ? <button type="button" className="btn btn-outline-info">Voi les résultats</button> : (
+                    lequizz.activation==='finis' ? <button type="button" className="btn btn-outline-warning">Voi les résultats</button> : (
                     <button type="button" className="btn btn-outline-success m-3" >Lancer Le Quizz</button>
                     )
                     )
                 } 
             </Card>
 
-            <Card className='card border-dark mt-3 mb-3 p-4 text-white'>
+            <Card className='card border-secondary mt-3 mb-3 p-4'>
                 <Card.Body className='text-center'>
                     <Card.Title as='div'  />
-                    <h2> <strong className='text-light'>Les Questions Du QuizZ :  </strong></h2>              
+                    <h2> <strong style={{color: '#11246F'}}>Les Questions Du QuizZ :  </strong></h2>              
                 </Card.Body>  
                 <Card.Text as='div' >
-                <h4 className='margin-left mt-2 ml-10'><strong className='text-info'>Nombre Totales des Questions : </strong>{question.length} </h4>
+                <h4 className='margin-left mt-2 ml-10' ><strong style={{color: '#21662F'}}>Nombre Totales des Questions : </strong>{question.length} </h4>
                 </Card.Text>  
-                <Card.Text as='div' style={{ textAlign: 'right'}}>
-                <button type="button" className="btn btn-outline-danger text" >Supprimer Tous</button> 
-                </Card.Text> 
+                <Row>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col></Col>
+                    <Col>                          
+                        <Card.Text as='div' style={{ textAlign: 'right'}}>
+                        <button type="button" className="btn btn-outline-success text" >Ajouter Question</button> 
+                        </Card.Text> 
+                    </Col>
+                    <Col>       
+                        <Card.Text as='div' style={{ textAlign: 'right'}}>
+                        <button type="button" className="btn btn-outline-danger text" >Supprimer Tous</button> 
+                        </Card.Text> 
+                    </Col>
+                </Row>
                 {question.map((q) => (
                     <div key={q._id} >
                         <Question  ques={q} />

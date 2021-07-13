@@ -26,32 +26,42 @@ const Question = ( { ques } ) => {
     return (
         <>
             {loading && <Loader />}
-            <Card className='card border-dark mt-3 mb-3 p-3 text-white'>
+            <Card className='card border-secondary mt-3 mb-3 p-3'>
             <Card.Body className='text-center p-1'>
                 <Card.Title as='div'  />
                 <div style={{ textAlign: 'right'}}> 
-                <h4 className='text-center'> <strong className='text-light'>Titre Question : {ques.titreQuestion} </strong></h4>   
-                <Button variant='light' className='btn-sm' style={{ textAlign: 'right'}}><i className='fas fa-edit'></i></Button>
-                <Button variant='danger' className='btn-sm' onClick = {() => deleteHandler(ques._id)}> <i className='fas fa-trash'></i></Button>
+                <h5 className='text-center'> <strong style={{color: '#11246F'}} >Titre Question : {ques.titreQuestion} </strong></h5>   
+                <Button 
+                variant='btn-sm btn-outline-dark m-1' 
+                className='btn-sm btn-sm btn-outline-dark'
+                style={{ textAlign: 'right'}}>
+                    <i className='fas fa-edit'></i>
+                </Button>
+                <Button 
+                variant='btn-sm btn-outline-danger' 
+                className='btn-sm btn-sm btn-outline-danger' 
+                onClick = {() => deleteHandler(ques._id)}> 
+                <i className='fas fa-trash'></i>
+                </Button>
                 </div>        
             </Card.Body>   
             <Card.Text as='div' >
-            <strong  className='text-info'>Type Question : </strong> {ques.typeQuestion}
+            <strong  style={{color: '#21662F'}}>Type Question : </strong> {ques.typeQuestion}
             </Card.Text>  
             <Card.Text as='div' >
-                <strong  className='text-info'>Choix Disponible : </strong>
+                <strong  style={{color: '#21662F'}}>Choix Disponible : </strong>
                     { ques.choixQuestion.map(q => (
                    <> {q} / </> 
                     ))}
             </Card.Text> 
             <Card.Text as='div' >
-            <strong  className='text-info'>Le(s) Réponse(s) : </strong>
+            <strong  style={{color: '#21662F'}}>Le(s) Réponse(s) : </strong>
                 { ques.reponseQuestion.map(q => (
                    <> {q} / </> 
                     ))}
             </Card.Text>  
             <Card.Text as='div' >
-            <strong  className='text-info'> Temps De Réponse : </strong> {ques.tempsQuestion}
+            <strong  style={{color: '#21662F'}}> Temps De Réponse : </strong> {ques.tempsQuestion}
             </Card.Text>  
         </Card> 
         {sucess && window.location.reload()}

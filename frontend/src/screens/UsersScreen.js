@@ -39,7 +39,7 @@ const UsersScreen = ( { history } ) => {
         <>
       
         <Row>
-         <h1 className='text-center mb-3'><strong> Mes Utilisateurs </strong> </h1>  
+         <h1 className='text-center mb-3' style={{color: '#11246F'}}><strong> Mes Utilisateurs </strong> </h1>  
         </Row>
      <Row>
          <Col></Col>
@@ -48,7 +48,7 @@ const UsersScreen = ( { history } ) => {
          
         <Col> 
         <LinkContainer to='/admin/users/adduser'>  
-             <button className ='btn btn-outline-light btn-sm ' >
+             <button className ='btn btn-outline-success btn-sm ' >
             <i className='fas fa-plus '></i> Créer Utilisateur
             </button>
             </LinkContainer> 
@@ -61,7 +61,7 @@ const UsersScreen = ( { history } ) => {
               <th>ID</th>
               <th>NAME</th>
               <th>EMAIL</th>
-              <th>ADMIN</th>
+              <th style={{textAlign: 'center'}}>ADMIN</th>
               <th></th>
             </tr>
           </thead>
@@ -73,18 +73,19 @@ const UsersScreen = ( { history } ) => {
                 <td>
                   <a href={`mailto:${user.emailUtilisateur}`}>{user.emailUtilisateur}</a>
                 </td>
-                <td>
+                <td style={{textAlign: 'center'}}>
                   { user.isAdmin ? (<i className='fas fa-check' style={{color:'green'}}></i>) : ( <i className='fas fa-times' style={{color: 'red'}}></i> )}
                 </td>
-                <td>
+                <td style={{textAlign: 'center'}}>
                   <LinkContainer to ={`user/${user._id}/edit`}>
-                    <Button variant='light' className='btn-sm'>
+                    <Button variant='btn-sm btn-outline-dark m-1' 
+                    className='btn-sm btn-sm btn-outline-dark'>
                       <i className='fas fa-edit'></i>
                     </Button>
                   </LinkContainer>
                   <Button
-                    variant='danger'
-                    className='btn-sm'
+                    variant='btn-outline-danger'
+                    className='btn-sm btn-outline-danger'
                     onClick = {() => deleteHandler(user._id)}
                   >
                     <i className='fas fa-trash'></i>

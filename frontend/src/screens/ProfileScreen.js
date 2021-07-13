@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import {Form, Button, } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import FormContainer from '../components/FormContainer'
 
 const ProfileScreen = ( { history } ) => {
 
@@ -47,37 +49,44 @@ const ProfileScreen = ( { history } ) => {
     }
 
     return (
-      <>
-            <h1 className='text-center mt-5'> Profile </h1>
+      <>         
+        <Link to='/'>
+            <button className='btn btn-outline-primary btn-sm'>
+            Go Back
+            </button>
+        </Link>
+            <h1 className='text-center mt-5' style={{color: '#11246F'}}> <strong>Editer Profile </strong></h1>
             {message && <Message variant='danger mt-2' > { message }</Message>}
             {error && <Message variant='danger mt-2'>{error}</Message>}
             {success && <Message variant='success mt-2'>Données Du Profile Changées</Message>}
             {loading && <Loader/>   }
+            <FormContainer> 
             <Form onSubmit={submitHandler} className='mt-4'>
                 <Form.Group controlId='nomUtilisateur' >
-                    <Form.Label> Nom D'Utiisateur :</Form.Label>
+                    <Form.Label> <strong>Nom D'Utiisateur :</strong></Form.Label>
                     <Form.Control  type='name' placeholder='Entrer Votre Nom' value={nomUtilisateur} onChange={(e) => setName(e.target.value)}></Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='emailUtilisateur' className='mt-4' >
-                    <Form.Label> Addresse Email :</Form.Label>
-                    <Form.Control type='email' placeholder='Entrer Votre Addresse Email' value={emailUtilisateur} onChange={(e) => setEmail(e.target.value)}></Form.Control>
+                    <Form.Label> <strong>Addresse Email :</strong></Form.Label>
+                    <Form.Control type='email' placeholder='Entrer Votre Addresse Email' value={emailUtilisateur} onChange={(e) => setEmail(e.target.value)} required></Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='mdp' className='mt-4' >
-                    <Form.Label> Mot de Passe :</Form.Label>
-                    <Form.Control  type='password' placeholder='Entrer Votre Mot de passe' value={mdp} onChange={(e) => setPassword(e.target.value)}></Form.Control>
+                    <Form.Label> <strong>Mot de Passe :</strong></Form.Label>
+                    <Form.Control  type='password' placeholder='Entrer Votre Mot de passe' value={mdp} onChange={(e) => setPassword(e.target.value)} required></Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='confirmMdp' className='mt-4' >
-                    <Form.Label> confirmer Mot de Passe :</Form.Label>
-                    <Form.Control  type='password' placeholder='Confirmer Votre Mot de passe' value={confirmMdp} onChange={(e) => setConfirmPassword(e.target.value)}></Form.Control>
+                    <Form.Label> <strong>confirmer Mot de Passe :</strong></Form.Label>
+                    <Form.Control  type='password' placeholder='Confirmer Votre Mot de passe' value={confirmMdp} onChange={(e) => setConfirmPassword(e.target.value)} required></Form.Control>
                 </Form.Group>
 
                 <Button type='Submit' variant='primary' className='mt-4'>
-                    Update
+                    Terminer
                 </Button>
             </Form>
+          </FormContainer>
         </>
     )
 }

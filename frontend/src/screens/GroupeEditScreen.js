@@ -66,96 +66,100 @@ const GroupeEditScreen = ({ match, history }) => {
 
     return (
         <>
-<Link to='/admin/groupes' className='btn btn-primary my-3'>
-        Go Back
-      </Link>
-      <FormContainer>
-      <h1 className='text-center mb-3'><strong> Editer Groupe </strong> </h1>
-        {loadingUpdate && <Loader />}
-        {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
-        {loading ? (
-          <Loader />
-        ) : error ? (
-          <Message variant='danger'>{error}</Message>
-        ) : (
-          <Form onSubmit={submitHandler}>
-            <Form.Group controlId='nomGroupe' className='mt-4'>
-              <Form.Label>Nom Utilisateur : </Form.Label>
-              <Form.Control
-                type='name'
-                placeholder='Entrer Nom'
-                value={nomGroupe}
-                onChange={(e) => setName(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
+          <Link to='/admin/groupes'>
+            <button className='btn btn-outline-primary btn-sm'>
+            Go Back
+            </button>
+          </Link>
+        <FormContainer>
+        <h1 className='text-center mb-3' style={{color: '#11246F'}}><strong> Editer Groupe </strong> </h1>
+          {loadingUpdate && <Loader />}
+          {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+          {loading ? (
+            <Loader />
+          ) : error ? (
+            <Message variant='danger'>{error}</Message>
+          ) : (
+            <Form onSubmit={submitHandler}>
+              <Form.Group controlId='nomGroupe' className='mt-4'>
+                <Form.Label> <strong>Nom Utilisateur :</strong> </Form.Label>
+                <Form.Control
+                  type='name'
+                  placeholder='Entrer Nom'
+                  value={nomGroupe}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                ></Form.Control>
+              </Form.Group>
 
-            <Form.Group controlId='descriptionGroupe' className='mt-4'>
-              <Form.Label>Addresse Email : </Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Entrer Email'
-                value={descriptionGroupe}
-                onChange={(e) => setDesc(e.target.value)}
-              ></Form.Control>
-            </Form.Group>
+              <Form.Group controlId='descriptionGroupe' className='mt-4'>
+                <Form.Label> <strong>Addresse Email :</strong> </Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Entrer Email'
+                  value={descriptionGroupe}
+                  onChange={(e) => setDesc(e.target.value)}
+                  required
+                ></Form.Control>
+              </Form.Group>
 
-            <Form.Group controlId='nomMembres' className='mt-4'>
-            <Form.Label>Choix des Utilisateurs : 
-                <Badge bg="danger" className='text-danger'>
-                Il Faut Re-Sélectionner Tous Les membres (Nouveux et anciens)
-                Sinon le groupe est Considérer comme vide...
-                    </Badge> 
-                </Form.Label>
+              <Form.Group controlId='nomMembres' className='mt-4'>
+              <Form.Label> <strong>Choix des Utilisateurs : </strong>
+                  <Badge bg="danger" className='text-danger'>
+                  Il Faut Re-Sélectionner Tous Les membres (Nouveux et anciens)
+                  Sinon le groupe est Considérer comme vide...
+                      </Badge> 
+                  </Form.Label>
 
-            <Row>
-                <Col>
-                    {(users) ? ( users.map(user => (
-                    <Form.Check
-                    key={user._id}
-                        type='radio'
-                        label={user.nomUtilisateur}
-                        name={user.emailUtilisateur}
-                        value={user.nomUtilisateur}
-                        onChange={(e) => handleChangeNom(e)}    
-                    ></Form.Check>
-                    ))): <Loader /> }
-                </Col>
-                <Col>
-                {(users) ? ( users.map(user => (
-                    <Form.Check
-                        key={user._id}
-                        type='radio'
-                        label={user.emailUtilisateur}
-                        hidden
-                    ></Form.Check>
-                    ))): <Loader /> }
-                </Col>
+              <Row>
+                  <Col>
+                      {(users) ? ( users.map(user => (
+                      <Form.Check
+                      key={user._id}
+                          type='radio'
+                          label={user.nomUtilisateur}
+                          name={user.emailUtilisateur}
+                          value={user.nomUtilisateur}
+                          onChange={(e) => handleChangeNom(e)}    
+                      ></Form.Check>
+                      ))): <Loader /> }
+                  </Col>
+                  <Col>
+                  {(users) ? ( users.map(user => (
+                      <Form.Check
+                          key={user._id}
+                          type='radio'
+                          label={user.emailUtilisateur}
+                          hidden
+                      ></Form.Check>
+                      ))): <Loader /> }
+                  </Col>
+                </Row>
+              </Form.Group> 
+              <Row>
+              <Col>
+                      <h6 className='mt-3'>Les Nouveux Membres :</h6>
+                      <ListGroup className='mt-1'>
+                          { nomMembres.map(nm => (
+                          <ListGroup.Item className='text-center' variant="success">{nm}</ListGroup.Item>
+                          ))}
+                      </ListGroup>
+                  </Col>
+                  <Col>        
+                  <h6 className='mt-3'>Les Anciens Membres :</h6>
+                  <ListGroup className='mt-2'>
+                      { oldM.map(old => (
+                      <ListGroup.Item variant="danger" className='text-center'>{old}</ListGroup.Item>
+                      ))}
+                  </ListGroup>
+                  </Col>
               </Row>
-            </Form.Group> 
-            <Row>
-            <Col>
-                    <h6 className='mt-3'>Les Nouveux Membres :</h6>
-                    <ListGroup className='mt-1'>
-                        { nomMembres.map(nm => (
-                        <ListGroup.Item className='text-center' variant="success">{nm}</ListGroup.Item>
-                        ))}
-                    </ListGroup>
-                </Col>
-                <Col>        
-                <h6 className='mt-3'>Les Anciens Membres :</h6>
-                <ListGroup className='mt-2'>
-                    { oldM.map(old => (
-                    <ListGroup.Item variant="danger" className='text-center'>{old}</ListGroup.Item>
-                    ))}
-                </ListGroup>
-                </Col>
-            </Row>
-            <Button type='submit' variant='primary' className='mt-4'>
-              Editer
-            </Button>
-          </Form>
-        )}
-      </FormContainer>          
+              <Button type='submit' variant='primary' className='mt-4'>
+                Editer
+              </Button>
+            </Form>
+          )}
+        </FormContainer>          
         </>
     )
 }
