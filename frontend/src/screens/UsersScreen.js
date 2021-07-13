@@ -39,8 +39,7 @@ const UsersScreen = ( { history } ) => {
         <>
       
         <Row>
-         <h1 className='text-center mb-3'><strong> Mes Utilisateurs </strong> </h1>
-         
+         <h1 className='text-center mb-3'><strong> Mes Utilisateurs </strong> </h1>  
         </Row>
      <Row>
          <Col></Col>

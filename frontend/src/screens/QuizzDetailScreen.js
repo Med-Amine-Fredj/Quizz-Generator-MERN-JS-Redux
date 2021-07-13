@@ -20,7 +20,6 @@ const QuizzDetailScreen = ({ match }) => {
         
         dispatch(getQuestionByQuizzId(match.params.id))
         dispatch(listQuizzDetails(match.params.id))
-        console.log(match.params.id)
     }, [dispatch, match])
 
 
@@ -60,10 +59,13 @@ const QuizzDetailScreen = ({ match }) => {
                 <Card.Body className='text-center'>
                     <Card.Title as='div'  />
                     <h2> <strong className='text-light'>Les Questions Du QuizZ :  </strong></h2>              
-                </Card.Body>   
+                </Card.Body>  
                 <Card.Text as='div' >
                 <h4 className='margin-left mt-2 ml-10'><strong className='text-info'>Nombre Totales des Questions : </strong>{question.length} </h4>
                 </Card.Text>  
+                <Card.Text as='div' style={{ textAlign: 'right'}}>
+                <button type="button" className="btn btn-outline-danger text" >Supprimer Tous</button> 
+                </Card.Text> 
                 {question.map((q) => (
                     <div key={q._id} >
                         <Question  ques={q} />

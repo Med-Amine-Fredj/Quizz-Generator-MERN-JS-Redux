@@ -1,4 +1,5 @@
 import  express from 'express'
+import path from 'path'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
 import colors from 'colors'
@@ -7,6 +8,7 @@ import quizzRoutes from './routes/quizzRoutes.js'
 import userRoutes from './routes/userRoutes.js' 
 import groupRoutes from './routes/groupRoutes.js'
 import { logout } from './controllers/userController.js'
+import uploadRoutes from './routes/uploadRoutes.js'
 
 
 
@@ -27,9 +29,12 @@ app.get('/',(req, res) => {
 app.use('/myquizz', quizzRoutes) 
 app.use('/users', userRoutes) 
 app.use('/groupes', groupRoutes) 
+app.use('/upload', uploadRoutes) 
+
+const __dirname = path.resolve()
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 app.use(notFound)
-
 app.use(errorHandler)
 
 

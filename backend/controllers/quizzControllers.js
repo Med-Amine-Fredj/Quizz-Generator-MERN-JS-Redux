@@ -34,42 +34,42 @@ const getQuizzById = asyncHandler(async(req,res) => {
 // @acess Private /admin
 const addQuizz = asyncHandler(async(req,res) => {
 
-    const { nomQuizz, descriptionQuizz, imageQuizz } =  req.body
-    const codeQuizz = Math.floor(Math.random() * 100000) + 1;
-
-    const quizzExists = await Quizz.findOne({ codeQuizz })
+    const codeQuizz = Math.floor(Math.random() * 100000) + 1
 
     const activation = "noncommencer"
 
-    if ( quizzExists ) {
-        res.status(400) 
-        throw new Error('Quizz Already Exist !')
-    }
-
-
-    const quizz = await Quizz.create({
-        nomQuizz,
-        descriptionQuizz,
-        imageQuizz,
+    const quizz = new Quizz({
+        nomQuizz: 'sample name',
+        descriptionQuizz: 'sample description',
+        imageQuizz: '/images/sample.jpg',
         activation,
         codeQuizz
     })
-
-    if (quizz) {
-        res.status(201).json({
-            _id: quizz._id,
-            nomQuizz : quizz.nomQuizz,
-            descriptionQuizz: quizz.descriptionQuizz,
-            imageQuizz: quizz.imageQuizz, 
-            activation: quizz.activation, 
-            codeQuizz: quizz.codeQuizz, 
-        })
-    } else {
-        res.status(400)
-        throw new Error('Invalid quizz Data')
-    }
+    
+    const createdQuizz = await quizz.save()
+    res.status(201).json(createdQuizz)
  })
 
+ // @desc Edit quizz 
+// @route PUT /admin/myquizz/:id
+// @acess Private /admin
+const editQuizz = asyncHandler(async(req,res) => {
+    const { nomQuizz, descriptionQuizz, imageQuizz } = req.body
+    
+    const quizz = await Quizz.findById(req.params.id)
+
+    if(quizz) {
+        quizz.nomQuizz = nomQuizz
+        quizz.descriptionQuizz = descriptionQuizz
+        quizz.imageQuizz = imageQuizz
+    }else {
+        res.status(404)
+        throw new Error('Quizz Not Found !')
+    }
+
+    const updatedQuizz = await quizz.save()
+    res.json(updatedQuizz)
+ })
 
 // @desc Add new question
 // @route POST /admin/myquizz/addquizz/:id/addQuestion
@@ -214,4 +214,5 @@ export {
     deleteQuizz,
     deleteQuestionById,
     getQuestionById,
+    editQuizz,
 }

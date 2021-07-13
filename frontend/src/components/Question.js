@@ -3,22 +3,36 @@ import { Card, Button, Row, Col} from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
-
+import { deleteQuestion } from '../actions/quizzActions'
+import { getQuestionByQuizzId } from '../actions/quizzActions'
 
 
 const Question = ( { ques } ) => {
+    
+    const  dispatch = useDispatch()
+
+
+    const questionDeleteOne = useSelector(state => state.questionDeleteOne)
+    const { loading, error, sucess} = questionDeleteOne
+
+    const deleteHandler = (id) => {
+      if( window.confirm('Are you sure ? ')) {
+        dispatch(deleteQuestion(id))
+      }
+    }
+
 
 
     return (
         <>
-
+            {loading && <Loader />}
             <Card className='card border-dark mt-3 mb-3 p-3 text-white'>
             <Card.Body className='text-center p-1'>
                 <Card.Title as='div'  />
                 <div style={{ textAlign: 'right'}}> 
                 <h4 className='text-center'> <strong className='text-light'>Titre Question : {ques.titreQuestion} </strong></h4>   
                 <Button variant='light' className='btn-sm' style={{ textAlign: 'right'}}><i className='fas fa-edit'></i></Button>
-                <Button variant='danger' className='btn-sm'> <i className='fas fa-trash'></i></Button>
+                <Button variant='danger' className='btn-sm' onClick = {() => deleteHandler(ques._id)}> <i className='fas fa-trash'></i></Button>
                 </div>        
             </Card.Body>   
             <Card.Text as='div' >
@@ -40,7 +54,7 @@ const Question = ( { ques } ) => {
             <strong  className='text-info'> Temps De Réponse : </strong> {ques.tempsQuestion}
             </Card.Text>  
         </Card> 
-
+        {sucess && window.location.reload()}
         </>
     )
 }

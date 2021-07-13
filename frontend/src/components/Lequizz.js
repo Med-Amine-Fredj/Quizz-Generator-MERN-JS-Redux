@@ -1,4 +1,5 @@
 import React from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
 import { Card, Container, Badge, Button} from 'react-bootstrap'
 import { Link, } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -50,10 +51,10 @@ const Lequizz = ( { lequizz, history } ) => {
             </Card.Body>   
             <Card.Text as='div' >
                 <div className='my-3'  >
-                {lequizz.descriptionQuizz.length > 60 ?
+                {lequizz.descriptionQuizz.length > 39 ?
                     (
                     <div>
-                        {`${lequizz.descriptionQuizz.substring(0, 60)}...`}
+                        {`${lequizz.descriptionQuizz.substring(0, 39)}...`}
                     </div>
                     ) :
                     <p>{lequizz.descriptionQuizz}</p> }
@@ -82,9 +83,11 @@ const Lequizz = ( { lequizz, history } ) => {
                 <i className='fas fa-eye'></i>
             </Button>
             </Link>
-            <Button disabled={lequizz.activation==='encours' || lequizz.activation==='finis'} variant='light' className='btn-sm'>
+            <LinkContainer to ={`myquizz/${lequizz._id}/edit`}>
+            <Button disabled={lequizz.activation==='encours' || lequizz.activation==='finis'} variant='light' className='btn-sm' >
                 <i className='fas fa-edit'></i>
             </Button>
+            </LinkContainer>
             <Button disabled={lequizz.activation==='encours' } variant='danger' className='btn-sm' onClick = {() => deleteHandler(lequizz._id)}>
                 <i className='fas fa-trash'></i>
             </Button>
