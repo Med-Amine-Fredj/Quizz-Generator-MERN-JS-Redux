@@ -204,6 +204,52 @@ const getQuestionById = asyncHandler(async(req,res) => {
     }
 })
 
+// @desc Start Quizz
+// @route PUT /admin/myquizz/:id/startquizz
+// @acess Only admin
+const SetQuizzStarted = asyncHandler(async(req,res) => {
+
+    const id = req.body.id
+    const quizz = await Quizz.findById(id)
+    if (quizz) {
+        if(quizz.activation ==='encours' || quizz.activation ==='finis') {
+            res.status(404)
+            throw new Error('Quizz Already Started Or Finished')
+        } else {
+            quizz.activation = 'encours'
+            const updatedQuizz = await quizz.save()
+            res.json(updatedQuizz)
+        }
+
+    } else {
+        res.status(404)
+        throw new Error('Quizz Not Found')
+    }
+})
+
+// @desc Stop Quizz
+// @route PUT /admin/myquizz/:id/stopquizz
+// @acess Only admin
+const SetQuizzStopped = asyncHandler(async(req,res) => {
+
+    const id = req.body.id
+    const quizz = await Quizz.findById(id)
+    if (quizz) {
+        if(quizz.activation ==='noncommencer' || quizz.activation ==='finis') {
+            res.status(404)
+            throw new Error('Quizz Already Finished Or Not Even Started')
+        } else {
+            quizz.activation = 'finis'
+            const updatedQuizz = await quizz.save()
+            res.json(updatedQuizz)
+        }
+
+    } else {
+        res.status(404)
+        throw new Error('Quizz Not Found')
+    }
+})
+
 
 export {
     getQuizz,
@@ -215,4 +261,7 @@ export {
     deleteQuestionById,
     getQuestionById,
     editQuizz,
+    SetQuizzStarted,
+    SetQuizzStopped,
+    
 }

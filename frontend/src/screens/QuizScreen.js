@@ -21,6 +21,11 @@ const QuizScreen = ( { history } ) => {
     const quizzAdd = useSelector(state => state.quizzAdd)
     const { loading: loadingAdd, error: errorAdd, sucess: sucessAdd, quizzAd} = quizzAdd
 
+    const quizzStart = useSelector(state => state.quizzStart)
+    const { loading: loadingStart, error: errorStart, sucess: sucessStart} = quizzStart
+
+    const quizzStop = useSelector(state => state.quizzStop)
+    const { loading: loadingStop, error: errorStop, sucess: sucessStop} = quizzStop
     
 
     useEffect(() => {   
@@ -30,10 +35,10 @@ const QuizScreen = ( { history } ) => {
         } else {
             dispatch(listQuizz())
         }
-        if(sucess) {
+        if(sucess || sucessStart || sucessStop ) {
             dispatch(listQuizz())
         }
-    }, [dispatch, sucessAdd, history, quizzAd, sucess])
+    }, [dispatch, sucessAdd, history, quizzAd, sucess, sucessStart, sucessStop])
 
 
     const addQuizzHandler = () => {
@@ -58,6 +63,10 @@ const QuizScreen = ( { history } ) => {
                     <i className='fas fa-plus'></i> Créer Quizz</button>
                 </Col>
             </Row>
+            {loadingStart && <Loader />}
+            {errorStart && <Message variant='danger'>{errorStart}</Message>}
+            {loadingStop && <Loader />}
+            {errorStop && <Message variant='danger'>{errorStop}</Message>}
             {loadingDelete && <Loader />}
             {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
             {loadingAdd && <Loader />}

@@ -20,7 +20,13 @@ import { QUIZZ_LIST_REQUEST,
     QUIZZ_UPDATE_REQUEST,
     QUIZZ_UPDATE_SUCCESS,
     QUIZZ_UPDATE_FAIL,
-    QUIZZ_UPDATE_RESET} 
+    QUIZZ_UPDATE_RESET,
+    QUIZZ_START_REQUEST,
+    QUIZZ_START_SUCCESS,
+    QUIZZ_START_FAIL,
+    QUIZZ_STOP_REQUEST,
+    QUIZZ_STOP_SUCCESS,
+    QUIZZ_STOP_FAIL} 
 from '../constants/quizzConstants'
 
 
@@ -135,5 +141,35 @@ export const quizzUpdateReducer = (state = { quizzEdit: {}}, action) => {
             return { quizzEdit: {}}
         default: 
             return state
+    }
+}
+
+export const quizzStartReducer = (state = {}, action) => {
+
+    switch(action.type) {
+        case QUIZZ_START_REQUEST:
+            return { loading: true }
+        case QUIZZ_START_SUCCESS:
+            return { loading: false,  sucess: true } 
+        case QUIZZ_START_FAIL: 
+            return{ loading: false, error: action.payload }
+        default: 
+            return state
+
+    }
+}
+
+export const quizzStopReducer = (state = {}, action) => {
+
+    switch(action.type) {
+        case QUIZZ_STOP_REQUEST:
+            return { loading: true }
+        case QUIZZ_STOP_SUCCESS:
+            return { loading: false,  sucess: true } 
+        case QUIZZ_STOP_FAIL: 
+            return{ loading: false, error: action.payload }
+        default: 
+            return state
+
     }
 }

@@ -5,7 +5,9 @@ import { Link, } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from './Message'
 import Loader from './Loader'
-import { deleteQuizz } from '../actions/quizzActions'
+import { deleteQuizz, startQuizz, stopQuizz } from '../actions/quizzActions'
+
+
 const Lequizz = ( { lequizz, history } ) => {
 
     const  dispatch = useDispatch()
@@ -14,17 +16,29 @@ const Lequizz = ( { lequizz, history } ) => {
     const quizzDelete = useSelector(state => state.quizzDelete)
     const { loading, error} = quizzDelete
 
+    const quizzStart = useSelector(state => state.quizzStart)
+    const { loading: loadingStart, error: errorStart} = quizzStart
+
+    const quizzStop = useSelector(state => state.quizzStop)
+    const { loading: loadingStop, error: errorStop} = quizzStop
+
     const deleteHandler = (id) => {
       if( window.confirm('Are you sure ? ')) {
         dispatch(deleteQuizz(id))
       }
     }
 
+    const startQuizzHandler = (id) => {
+            dispatch(startQuizz(id))
+    }
 
+    const stopQuizzHandler = (id) => {
+        dispatch(stopQuizz(id))
+    }
 
     return (
         <Container>
-        {loading  ? <Loader /> : error ? <Message varaint='danger'>{error}</Message> : (
+        {loading || loadingStart || loadingStop ? <Loader /> : error || errorStart || errorStop ? <Message varaint='danger'>{error}</Message> : (
         <Card className='card border-dark mt-3 mb-3 p-3 text-white' style={{height: '500px'}}>
             <Link to={`/admin/myquizz/${lequizz._id}`}>
                 <Card.Img style={{height: '9rem'}} src={lequizz.imageQuizz} variant='top' />
@@ -65,14 +79,16 @@ const Lequizz = ( { lequizz, history } ) => {
             </Card.Text>  
             <Card.Text className='card-text text-center '>
             {lequizz.activation==='encours' ? 
-            <button type="button" className="btn btn-outline-danger" > 
+            <button  className="btn btn-outline-danger"
+            onClick = {() => stopQuizzHandler({id: lequizz._id})} > 
                 Arrêter 
             </button> : (
             lequizz.activation==='finis' ? 
             <button type="button" className="btn btn-outline-info" > 
                 Voir Résultats
             </button> :
-            <button type="button" className="btn btn-outline-success" >
+            <button  className="btn btn-outline-success" 
+            onClick = {() => startQuizzHandler({id: lequizz._id})}>
                 Lancer
             </button>)
             }

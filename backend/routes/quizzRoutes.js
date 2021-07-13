@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router() 
 import { getQuizz, getQuizzById, addQuizz, addQuestion, getQuestionByQuizzId, deleteQuizz, deleteQuestionById, getQuestionById,
-    editQuizz } from '../controllers/quizzControllers.js'
+    editQuizz, SetQuizzStarted, SetQuizzStopped } from '../controllers/quizzControllers.js'
 import { protect, admin } from '../middleware/authMiddleware.js'
 
 
@@ -10,6 +10,9 @@ import { protect, admin } from '../middleware/authMiddleware.js'
 router.route('/').get(protect, admin, getQuizz).post(protect, admin, addQuizz)
 router.route('/:id').get(protect, admin, getQuizzById).delete(protect, admin, deleteQuizz).put(protect, admin, editQuizz)
 router.route('/addquizz')
+router.route('/:id/startquizz').put(protect, admin, SetQuizzStarted)
+router.route('/:id/stopquizz').put(protect, admin, SetQuizzStopped)
+
 
 //Question Routes
 router.route('/addquizz/:id/addquestion').put(protect, admin, addQuestion)

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { QUIZZ_LIST_REQUEST, QUIZZ_LIST_SUCCESS, QUIZZ_LIST_FAIL, QUIZZ_DETAILS_REQUEST, QUIZZ_DETAILS_SUCCESS, QUIZZ_DETAILS_FAIL, QUIZZ_DELETE_REQUEST, QUIZZ_DELETE_SUCCESS, QUIZZ_DELETE_FAIL, QUESTION_LIST_REQUEST, QUESTION_LIST_SUCCESS, QUESTION_LIST_FAIL, QUESTION_DELETE_REQUEST, QUESTION_DELETE_SUCCESS, QUESTION_DELETE_FAIL, QUIZZ_ADD_REQUEST, QUIZZ_ADD_SUCCESS, QUIZZ_ADD_RESET, QUIZZ_ADD_FAIL, QUIZZ_UPDATE_REQUEST, QUIZZ_UPDATE_SUCCESS, QUIZZ_UPDATE_RESET, QUIZZ_UPDATE_FAIL} from '../constants/quizzConstants'
+import { QUIZZ_LIST_REQUEST, QUIZZ_LIST_SUCCESS, QUIZZ_LIST_FAIL, QUIZZ_DETAILS_REQUEST, QUIZZ_DETAILS_SUCCESS, QUIZZ_DETAILS_FAIL, QUIZZ_DELETE_REQUEST, QUIZZ_DELETE_SUCCESS, QUIZZ_DELETE_FAIL, QUESTION_LIST_REQUEST, QUESTION_LIST_SUCCESS, QUESTION_LIST_FAIL, QUESTION_DELETE_REQUEST, QUESTION_DELETE_SUCCESS, QUESTION_DELETE_FAIL, QUIZZ_ADD_REQUEST, QUIZZ_ADD_SUCCESS, QUIZZ_ADD_RESET, QUIZZ_ADD_FAIL, QUIZZ_UPDATE_REQUEST, QUIZZ_UPDATE_SUCCESS, QUIZZ_UPDATE_RESET, QUIZZ_UPDATE_FAIL, QUIZZ_START_REQUEST, QUIZZ_START_SUCCESS, QUIZZ_START_FAIL, QUIZZ_STOP_REQUEST, QUIZZ_STOP_SUCCESS, QUIZZ_STOP_FAIL} from '../constants/quizzConstants'
 
 
 export const listQuizz = () => async(dispatch, getState) => {
@@ -223,3 +223,62 @@ export const updateQuizz = (quizz) => async (dispatch, getState, setState) => {
   }
 }
 
+export const startQuizz = (id) => async (dispatch, getState) => {
+    try {
+        
+        dispatch({
+            type: QUIZZ_START_REQUEST
+        })
+
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers:   {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        await axios.put(`/myquizz/:id/startquizz`, id,config)
+
+        dispatch({
+            type: QUIZZ_START_SUCCESS, 
+        })
+
+    } catch (error) {
+        dispatch({
+            type: QUIZZ_START_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        })
+    }
+}
+
+export const stopQuizz = (id) => async (dispatch, getState) => {
+    try {
+        
+        dispatch({
+            type: QUIZZ_STOP_REQUEST
+        })
+
+        const { userLogin: { userInfo } } = getState()
+
+        const config = {
+            headers:   {
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
+            }
+        }
+
+        await axios.put(`/myquizz/:id/stopquizz`, id,config)
+
+        dispatch({
+            type: QUIZZ_STOP_SUCCESS, 
+        })
+
+    } catch (error) {
+        dispatch({
+            type: QUIZZ_STOP_FAIL,
+            payload: error.response && error.response.data.message ? error.response.data.message : error.message,
+        })
+    }
+}
