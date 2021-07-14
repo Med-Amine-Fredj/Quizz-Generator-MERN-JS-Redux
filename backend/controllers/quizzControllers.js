@@ -83,24 +83,7 @@ const addQuestion = asyncHandler(async(req,res) => {
     const quizz = await Quizz.findById(quizzId)
 
     if(quizz) {
-        if (typeQuestion === "choix unique") {
-            if(reponseQuestion.length > 1) {
-                res.status(400)
-                throw new Error('Select Only One Correct Answer ! ')
-            }
-        }
-        if (typeQuestion === "choix multiple") {
-            if(reponseQuestion.length < 2) {
-                res.status(400)
-                throw new Error('Select At Least Two Correct Answer ! ')
-            }
-        }
-    
-        if(reponseQuestion.length >choixQuestion.length ) {
-            res.status(400)
-            throw new Error('You Cannot select more answers than choices ! ')     
-        }
-    
+
         const question = await Question.create({
             quizzId,
             titreQuestion,
@@ -250,6 +233,24 @@ const SetQuizzStopped = asyncHandler(async(req,res) => {
     }
 })
 
+// @desc Delete  All Question By QuizzId
+// @route DELETE /admin/myquizz/:id/deleteall
+// @acess Private /admin
+const deleteAllQuestionByQuizzId = asyncHandler(async(req,res) => {
+    const quizzId = req.params.id
+    const quizz = await Quizz.findById(quizzId)
+    if (quizz) {
+            await Question.deleteMany({quizzId: quizzId})
+            res.json({
+                message: 'All Questions Removed ! '
+            })
+
+    } else {
+        res.status(404)
+        throw new Error('Quizz Not Found !')
+    }
+ })
+
 
 export {
     getQuizz,
@@ -263,5 +264,5 @@ export {
     editQuizz,
     SetQuizzStarted,
     SetQuizzStopped,
-    
+    deleteAllQuestionByQuizzId,
 }

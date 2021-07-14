@@ -26,7 +26,16 @@ import { QUIZZ_LIST_REQUEST,
     QUIZZ_START_FAIL,
     QUIZZ_STOP_REQUEST,
     QUIZZ_STOP_SUCCESS,
-    QUIZZ_STOP_FAIL} 
+    QUIZZ_STOP_FAIL,
+    QUESTION_ADD_REQUEST,
+    QUESTION_ADD_SUCCESS,
+    QUESTION_ADD_FAIL,
+    QUESTION_ADD_RESET,
+    QUESTION_DELETE_RESET,
+    QUESTION_DELETE_ALL_REQUEST,
+    QUESTION_DELETE_ALL_SUCCESS,
+    QUESTION_DELETE_ALL_FAIL,
+    QUESTION_DELETE_ALL_RESET} 
 from '../constants/quizzConstants'
 
 
@@ -103,6 +112,8 @@ export const questionDeleteOneReducer = (state = {}, action) => {
             return { loading: false,  sucess: true } 
         case QUESTION_DELETE_FAIL: 
             return{ loading: false, error: action.payload }
+        case QUESTION_DELETE_RESET: 
+            return{ sucess: false }
         default: 
             return state
 
@@ -168,6 +179,40 @@ export const quizzStopReducer = (state = {}, action) => {
             return { loading: false,  sucess: true } 
         case QUIZZ_STOP_FAIL: 
             return{ loading: false, error: action.payload }
+        default: 
+            return state
+
+    }
+}
+
+export const questionAddReducer = (state = {}, action) => {
+
+    switch(action.type) {
+        case QUESTION_ADD_REQUEST:
+            return { loading: true }
+        case QUESTION_ADD_SUCCESS:
+            return { loading: false, sucess: true } 
+        case QUESTION_ADD_FAIL: 
+            return{ loading: false, error: action.payload }
+        case QUESTION_ADD_RESET: 
+            return { sucess: false }
+        default: 
+            return state
+
+    }
+}
+
+export const questionDeleteAllReducer = (state = {}, action) => {
+
+    switch(action.type) {
+        case QUESTION_DELETE_ALL_REQUEST:
+            return { loading: true }
+        case QUESTION_DELETE_ALL_SUCCESS:
+            return { loading: false,  sucess: true } 
+        case QUESTION_DELETE_ALL_FAIL: 
+            return{ loading: false, error: action.payload }
+        case QUESTION_DELETE_ALL_RESET: 
+            return{ sucess: false }
         default: 
             return state
 
