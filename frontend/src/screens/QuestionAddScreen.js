@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col, Badge } from 'react-bootstrap'
 import FormContainer from '../components/FormContainer'
 import { QUESTION_ADD_RESET } from '../constants/quizzConstants'
@@ -88,6 +89,11 @@ const QuestionAddScreen = ({history, match}) => {
         <>
         { loading && <Loader /> }
         {error  && <Message variant='danger'>{error}</Message>}
+        <Link to={`/admin/myquizz/${match.params.id}`}>
+            <button className='btn btn-outline-primary btn-sm'>
+            Go Back
+            </button>
+        </Link>
          <h1 className='text-center mb-3' style={{color: '#11246F'}}><strong> Ajouter Question </strong> </h1>  
         <FormContainer>
             <Form  onSubmit={submitHandler}>
@@ -107,18 +113,19 @@ const QuestionAddScreen = ({history, match}) => {
                   as='select'
                   onChange={(e) => handleChangeType(e)}
                   required >
-                  <option defaultValue="choix multiple"  hidden >Choisir...</option>
+                  <option defaultValue="choix multiple"  disabled >Choisir...</option>
                   <option value="choix multiple">Choix Multiple</option>
                   <option value="choix unique">Choix Unique</option>
                 </Form.Control>
               </Form.Group>
 
               <Form.Label className='mt-4'> <strong>Choix Question : </strong></Form.Label>
+              <br></br>
               <Badge bg="danger" className='text-danger'>
-                  Si Vous sélectionnez Choix Unique prière de chosir une seule réponse
+                  Si Vous sélectionnez Choix Unique prière de chosir une seule réponse !
                       </Badge> 
                       <Badge bg="danger" className='text-danger'>
-                  Une fois Vous choisissez les bonnes réponses vous pouvez plus les modifiers
+                  Veuillez écrire les réponses avant de sélectionnez les justes sinon les réponses seront vide ! 
                       </Badge> 
               <Row>
                 <Col>
@@ -229,11 +236,11 @@ const QuestionAddScreen = ({history, match}) => {
                   as='select'
                   onChange={(e) => handleChangeTime(e)} 
                   required>
-                  <option defaultValue="15 secondes"  hidden >Choisir...</option>
-                  <option value="15 secondes">15 secondes</option>
-                  <option value="20 secondes">20 secondes</option>
-                  <option value="25 secondes">25 secondes</option>
-                  <option value="30 secondes">30 secondes</option>
+                  <option defaultValue="15"  disabled >Choisir...</option>
+                  <option value="15">15 secondes</option>
+                  <option value="20">20 secondes</option>
+                  <option value="25">25 secondes</option>
+                  <option value="30">30 secondes</option>
                 </Form.Control>
               </Form.Group>
 

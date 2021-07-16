@@ -1,41 +1,28 @@
 import mongoose from 'mongoose'
 
 
-const detailsReponseSchema = mongoose.Schema({
-    utilisateur: {
-        type: mongoose.Schema.Types.ObjectId,
+const reponseSchema = mongoose.Schema({
+
+    idUtilisateur: {
+        type: String,
         require: true,
-        ref: 'Utilisateurs'
+    },
+    idQuestion: {
+        type: String,
+        require: true,
+    },
+    idQuizz: {
+        type: String,
+        require: true,
     },
     tempsReponse: {
         type: Number,
         require: true,
     },
-    groupe: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Groupe'
-    },
-    reponse: [
-        {
-            reponseCondidat1: { type: String, require:true, },
-            reponseCondidat2: { type: String, },
-            reponseCondidat3: { type: String, },
-            reponseCondidat4: { type: String, },
-            reponseCondidat5: { type: String, }, 
-        }
-            ],
-}, {
-    timestamps: true
-})
-
-const reponseSchema = mongoose.Schema({
-
-    question: {
-        type: mongoose.Schema.Types.ObjectId,
+    reponse: {
+        type: Array,
         require: true,
-        ref: 'Question'
     },
-    detailsReponse: [detailsReponseSchema],
 }, {
     timestamps: true
 })

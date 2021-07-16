@@ -13,11 +13,27 @@ import { quizzListReducers,
     questionAddReducer, 
     questionDeleteAllReducer} 
     from './reducers/quizzReducers'
-import { userLoginReducer, userDetailsReducer, userUpdateProfileReducer, userListReducer, userDeleteReducer, 
-    userUpdateReducer, userAddReducer, userOnlineList } from './reducers/userReducers'
-import {groupesListReducers, groupeDeleteReducer, groupeAddReducer, groupDetailsReducer, groupUpdateReducer,} from './reducers/groupReducers'
+import { userLoginReducer,
+    userDetailsReducer, 
+    userUpdateProfileReducer, 
+    userListReducer, 
+    userDeleteReducer, 
+    userUpdateReducer, 
+    userAddReducer, 
+    userOnlineList } 
+    from './reducers/userReducers'
+import {groupesListReducers, 
+    groupeDeleteReducer, 
+    groupeAddReducer, 
+    groupDetailsReducer, 
+    groupUpdateReducer,} 
+    from './reducers/groupReducers'
+import { quizzByCodeReducers } from './reducers/reponseReducers'
 
 const reducer = combineReducers({
+    quizzByCode: quizzByCodeReducers,
+
+
     quizzList: quizzListReducers,
     quizzDetails: quizzDetailsReducers,
     quizzDelete: quizzDeleteReducer,
@@ -42,6 +58,7 @@ const reducer = combineReducers({
     groupeAdd: groupeAddReducer,
     groupDetails: groupDetailsReducer,
     groupUpdate: groupUpdateReducer,
+
     
 
 })

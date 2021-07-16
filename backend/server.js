@@ -9,7 +9,7 @@ import userRoutes from './routes/userRoutes.js'
 import groupRoutes from './routes/groupRoutes.js'
 import { logout } from './controllers/userController.js'
 import uploadRoutes from './routes/uploadRoutes.js'
-
+import reponseRoutes from './routes/reponseRoutes.js'
 
 
 dotenv.config()
@@ -30,13 +30,13 @@ app.use('/myquizz', quizzRoutes)
 app.use('/users', userRoutes) 
 app.use('/groupes', groupRoutes) 
 app.use('/upload', uploadRoutes) 
+app.use('/reponse', reponseRoutes) 
 
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 app.use(notFound)
 app.use(errorHandler)
-
 
 const PORT = process.env.PORT || 5000
 

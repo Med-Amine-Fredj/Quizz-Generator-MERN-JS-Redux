@@ -90,7 +90,7 @@ const QuizzEditScreen = ({ match, history }) => {
         Go Back
         </Link>
         <FormContainer>
-        <h1 className='text-center mb-3' style={{color: '#11246F'}}><strong> Editer Quizz</strong> </h1>
+        <h1 className='text-center mb-3' style={{color: '#11246F'}}><strong> Détailles Quizz</strong> </h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
         {loading ? (

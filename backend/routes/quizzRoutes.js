@@ -16,7 +16,7 @@ router.route('/:id/stopquizz').put(protect, admin, SetQuizzStopped)
 
 //Question Routes
 router.route('/addquizz/:id/addquestion').put(protect, admin, addQuestion)
-router.route('/:id/question').get(protect, admin, getQuestionByQuizzId)
+router.route('/:id/question').get(protect,  getQuestionByQuizzId)
 router.route('/:id/deleteall').delete(protect, admin, deleteAllQuestionByQuizzId)
 router.route('/:id/question/:id').delete(protect, admin, deleteQuestionById).get(protect, admin, getQuestionById)
 

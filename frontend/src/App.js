@@ -16,6 +16,7 @@ import GroupeListScreen from './screens/GroupeListScreen'
 import GroupeAddScreen from './screens/GroupeAddScreen'
 import GroupeEditScreen from './screens/GroupeEditScreen'
 import QuestionAddScreen from './screens/QuestionAddScreen'
+import ReponseScreen from './screens/ReponseScreen'
 
 
 
@@ -40,6 +41,8 @@ function App() {
           <Route path='/admin/userslist' component={UsersScreen} exact/>
           <Route path='/admin/user/:id/edit' component={UserEditScreen} exact/>
           <Route path='/admin/users/adduser' component={UserAddScreen} exact/>
+          <Route path='/reponse/:id' component={ReponseScreen} exact/>
+
           <Route path='/' component={HomeScreen} exact/>
         </Container>
       </main>

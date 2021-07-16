@@ -63,7 +63,7 @@ const Question = ( { ques } ) => {
                 ))}
             </Card.Text>  
             <Card.Text as='div' >
-            <strong  style={{color: '#21662F'}}> Temps De Réponse : </strong> {ques.tempsQuestion}
+            <strong  style={{color: '#21662F'}}> Temps De Réponse : </strong> {ques.tempsQuestion} Secondes
             </Card.Text>  
             <div style={{ textAlign: 'right'}}> 
                 <Button 
