@@ -24,7 +24,7 @@ const HomeScreen = ({history}) => {
             if(success) {
                 dispatch({ type: QUIZZ_LIST_BYCODE_RESET,
                 payload : quizzCode })
-                history.push(`/reponse/${quizzCode._id}`)
+                history.push(`/reponse/${quizzCode._id}/`)
             }  
         }
     }, [history, loading, error, success,quizzCode, code, dispatch])

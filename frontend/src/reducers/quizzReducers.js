@@ -35,7 +35,11 @@ import { QUIZZ_LIST_REQUEST,
     QUESTION_DELETE_ALL_REQUEST,
     QUESTION_DELETE_ALL_SUCCESS,
     QUESTION_DELETE_ALL_FAIL,
-    QUESTION_DELETE_ALL_RESET} 
+    QUESTION_DELETE_ALL_RESET,
+    QUESTION_GETBYID_REQUEST,
+    QUESTION_GETBYID_SUCCESS,
+    QUESTION_GETBYID_FAIL,
+    QUESTION_GETBYID_RESET} 
 from '../constants/quizzConstants'
 
 
@@ -218,3 +222,22 @@ export const questionDeleteAllReducer = (state = {}, action) => {
 
     }
 }
+
+
+export const questionDetailsReducers = (state = { questionDetail: {} }, action) => {
+
+    switch(action.type) {
+        case QUESTION_GETBYID_REQUEST:
+            return { loading: true, ...state}
+        case QUESTION_GETBYID_SUCCESS:
+            return { loading: false, success: true, questionDetail: action.payload } 
+        case QUESTION_GETBYID_FAIL: 
+            return{ loading: false, error: action.payload }
+        case QUESTION_GETBYID_RESET: 
+            return{ success: false, questionDetail: {} }
+        default: 
+            return state
+
+    }
+}
+

@@ -1,57 +1,80 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {getQuestionByQuizzId } from '../actions/quizzActions'
-import Question from '../components/Question'
+import { Link } from 'react-router-dom'
+import { Container, Card } from 'react-bootstrap'
+import {getQuestionByQuizzId, listQuizzDetails } from '../actions/quizzActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 
 
-const ReponseScreen = ({ match }) => {
+
+
+const ReponseScreen = ({ match, history }) => {
 
     const  dispatch = useDispatch()
-
-    const [seconde, setSecondes] = useState(10)
-    const [time, setTime] = useState()
-
-
-    const quizzByCode = useSelector(state => state.quizzByCode)
-    const {loading, error, success, quizzCode} = quizzByCode
 
     const questionList = useSelector(state => state.questionList)
     const {loading: loadingQ, error: errorQ, question} = questionList
 
-    const TimeHandler = () => {
-        setTime(seconde)
-    }
+    const quizzDetails = useSelector(state => state.quizzDetails)
+    const {loading: loadingD, error: errorD, lequizz} = quizzDetails
+
     useEffect(() => {
         dispatch(getQuestionByQuizzId(match.params.id))
-       /* if (seconde > 0) {
-            setTimeout(() => setSecondes(seconde - 1), 1000);
-          } else {
-            setSecondes('Finshed!');
-        } */
-    }, [seconde,setSecondes,quizzCode, dispatch, match])
+        dispatch(listQuizzDetails(match.params.id))
+    }, [dispatch, match])
+
+    const reloadHandler =() => {
+        window.location.reload();
+    }
 
 
     return (
         <>
-         {quizzCode.activation}
-        
-            <button type='Submit' variant='primary' className ='btn btn-outline-primary btn-sm ' 
-            onClick = {TimeHandler}>
-            Test Time
+            <div style={{ display: "flex" }}>
+            <Link to='/'>
+                <button className='btn btn-outline-primary btn-sm'
+                style={{ marginRight: "auto" }}>
+                    Go Back
+                </button>
+            </Link>
+            <button 
+            style={{ marginLeft: "auto" }}
+            onClick={ reloadHandler}
+            className='btn btn-link btn-sm'> 
+                Refresh
             </button>
-        <h1>{seconde}</h1>
-        <h2>{time}</h2>
-        { loading || loadingQ  ? <Loader /> : error || errorQ ? <Message variant='danger'>{error}</Message>: (
-            <div>
-                {question.map((q) => (
-                            <div key={q._id} >
-                                <Question  ques={q}  />
-                            </div>            
-                ))}
             </div>
-        )}
+            <Container>
+                { loadingQ || loadingD ? <Loader /> : errorQ || errorD ? <Message variant='danger'>{errorQ || errorD}</Message>: (
+                    <Card className='card border-secondary mt-4 mb-1 p-3'>
+                        <Card.Body className='text-center'>
+                            <Card.Title as='h1'>
+                                <strong   style={{color: '#11246F'}}> {lequizz.nomQuizz} </strong>   
+                            </Card.Title>   
+                            <Card.Text className='text-center' >
+                                {lequizz.activation==='encours' ? <span type="button" className="badge rounded-pill bg-success" >En Cours</span> : (
+                                    lequizz.activation==='finis' ? <span type="button" className="badge rounded-pill bg-danger">Finis</span> :
+                                    <span type="button" className="badge rounded-pill bg-warning">Non Commencé</span>)
+                                }
+                            </Card.Text>     
+                        </Card.Body>  
+                        <Card.Text as='div' >
+                            <h4 className='margin-left mt-2 ml-10' ><strong style={{color: '#21662F'}}>Code Quizz : : </strong>{lequizz.codeQuizz} </h4>
+                        </Card.Text>  
+                        <Card.Text as='div' >
+                            <h4 className='margin-left mt-2 ml-10' ><strong style={{color: '#21662F'}}>Nombre Totales des Questions : </strong>{question.length} </h4>
+                        </Card.Text>   
+                        <button type="button" className="btn btn-outline-danger" 
+                       disabled={lequizz.activation==='finis' || lequizz.activation==='noncommencer'}
+                        onClick = { () => question.map((q) => ( 
+                        history.push(`/reponse/${lequizz._id}/question/${q._id}`)
+                        ))}> 
+                            Commencer
+                        </button>
+                    </Card>
+                )}
+            </Container>
         </>
     )
 }

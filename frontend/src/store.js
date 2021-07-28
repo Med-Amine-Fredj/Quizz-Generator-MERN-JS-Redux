@@ -10,7 +10,8 @@ import { quizzListReducers,
     quizzUpdateReducer, 
     quizzStartReducer, 
     quizzStopReducer, 
-    questionAddReducer, 
+    questionAddReducer,
+    questionDetailsReducers, 
     questionDeleteAllReducer} 
     from './reducers/quizzReducers'
 import { userLoginReducer,
@@ -28,11 +29,13 @@ import {groupesListReducers,
     groupDetailsReducer, 
     groupUpdateReducer,} 
     from './reducers/groupReducers'
-import { quizzByCodeReducers } from './reducers/reponseReducers'
+import { quizzByCodeReducers, reponseAddReducer } from './reducers/reponseReducers'
+
 
 const reducer = combineReducers({
     quizzByCode: quizzByCodeReducers,
-
+    questionDetails: questionDetailsReducers,
+    reponseAdd: reponseAddReducer,
 
     quizzList: quizzListReducers,
     quizzDetails: quizzDetailsReducers,
