@@ -71,7 +71,7 @@ const QuizzDetailScreen = ({ match }) => {
         </Link>
             <Container>
                 { loading || loadingStart || loadingStop ? <Loader /> : error || errorStart || errorStop ? <Message variant='danger'>{error}</Message>: (
-                <Card className='card border-secondary mt-4 mb-1 p-3'>
+                <Card className='card border-secondary mt-4 mb-1 p-3' >
                 <Card.Body className='text-center'>
                     <Card.Title as='h1'>
                         <strong   style={{color: '#11246F'}}> {lequizz.nomQuizz} </strong>   

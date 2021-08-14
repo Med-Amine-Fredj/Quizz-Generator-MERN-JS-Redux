@@ -33,6 +33,7 @@ const Reponse = ({ id } ) => {
 
     const TimeHandler = () => {
         setTime(questionDetail.tempsQuestion - seconde)
+        setSecondes("0")
     }
 
     let secondes
@@ -47,7 +48,7 @@ const Reponse = ({ id } ) => {
 
 
     useEffect(() => {
-        
+
         if(success) {
             dispatch(listQuestionDetails(id)) 
              }  else {
@@ -108,10 +109,10 @@ return (
                             ))}
                 </Card.Text>   
                 <Card.Text as='div' style={{ display: "flex" }}>
-                <Card.Text as='h6' className='mt-5'>
+                <Card.Text as='h6' className='mt-5 text-muted'>
                     Temps Restans : {seconde}
                 </Card.Text>  
-                <Button type='submit' variant='primary' className='mt-4' style={{ marginLeft: "auto" }}
+                <Button type='submit' variant='success' className='mt-4' style={{ marginLeft: "auto" }}
                 onClick={TimeHandler} 
                 disabled={stop}>
                 Terminer

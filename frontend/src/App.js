@@ -18,6 +18,7 @@ import GroupeEditScreen from './screens/GroupeEditScreen'
 import QuestionAddScreen from './screens/QuestionAddScreen'
 import ReponseScreen from './screens/ReponseScreen'
 import QuestionReponseScreen from './screens/QuestionReponseScreen'
+import QuizzResultScreen from './screens/QuizzResultScreen'
 
 
 
@@ -36,6 +37,7 @@ function App() {
           <Route path='/admin/myquizz/:id' component={QuizzDetailScreen} exact/>
           <Route path='/admin/myquizz/:id/edit' component={QuizzEditScreen} exact/>
           <Route path='/admin/myquizz/:id/addquestion' component={QuestionAddScreen} />
+          <Route path='/admin/myquizz/:id/results' component={QuizzResultScreen} />
           <Route path='/admin/groupes/:id/edit' component={GroupeEditScreen} exact/>
           <Route path='/admin/groupes/addgroup' component={GroupeAddScreen} exact/>
           <Route path='/admin/groupes' component={GroupeListScreen} exact/>

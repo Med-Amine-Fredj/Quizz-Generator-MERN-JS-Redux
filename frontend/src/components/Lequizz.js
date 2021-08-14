@@ -83,9 +83,11 @@ const Lequizz = ( { lequizz, history } ) => {
                 Arrêter 
             </button> : (
             lequizz.activation==='finis' ? 
-            <button type="button" className="btn btn-outline-warning" > 
+            <Link to= {`/admin/myquizz/${lequizz._id}/results`}>
+            <button className="btn btn-outline-warning"  > 
                 Voir Résultats
-            </button> :
+            </button>
+            </Link> :
             <button  className="btn btn-outline-success" 
             onClick = {() => startQuizzHandler({id: lequizz._id})}>
                 Lancer

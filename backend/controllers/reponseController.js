@@ -50,9 +50,46 @@ const addReponse = asyncHandler(async(req,res) => {
     }
  })
 
+// @desc Fetch Response  By quizzId
+// @route GET /admin/myquizz/:id/results
+// @acess Only admin
+const getResponseByQuizzId = asyncHandler(async(req,res) => {
+
+    const quizzId = req.params.id
+
+    const responses = await Reponse.find({}).where("idQuizz",quizzId)
+
+    if (responses) {
+        res.json(responses)
+    } else {
+        res.status(404)
+        throw new Error('Quizz Not Found')
+    }
+
+})
+
+
+// @desc Fetch Response  By quizzId
+// @route GET /admin/myquizz/:id/results
+// @acess Only admin
+const getResponseByQuestionId = asyncHandler(async(req,res) => {
+
+    const questionId = req.params.id
+
+    const responses = await Reponse.find({}).where("idQuestion",questionId)
+
+    if (responses) {
+        res.json(responses)
+    } else {
+        res.status(404)
+        throw new Error('Quizz Not Found')
+    }
+})
 
 
 export {
     getQuizzByCode,
-    addReponse
+    addReponse,
+    getResponseByQuizzId,
+    getResponseByQuestionId,
 }

@@ -29,14 +29,15 @@ import {groupesListReducers,
     groupDetailsReducer, 
     groupUpdateReducer,} 
     from './reducers/groupReducers'
-import { quizzByCodeReducers, reponseAddReducer } from './reducers/reponseReducers'
+import { quizzByCodeReducers, reponseAddReducer, responseListByQuizzReducer, responseListByQuestionReducer } from './reducers/reponseReducers'
 
 
 const reducer = combineReducers({
     quizzByCode: quizzByCodeReducers,
     questionDetails: questionDetailsReducers,
     reponseAdd: reponseAddReducer,
-
+    responseListByQuizz: responseListByQuizzReducer,
+    responseListByQuestion: responseListByQuestionReducer,
     quizzList: quizzListReducers,
     quizzDetails: quizzDetailsReducers,
     quizzDelete: quizzDeleteReducer,

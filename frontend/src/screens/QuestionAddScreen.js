@@ -241,6 +241,12 @@ const QuestionAddScreen = ({history, match}) => {
                   <option value="20">20 secondes</option>
                   <option value="25">25 secondes</option>
                   <option value="30">30 secondes</option>
+                  <option value="35">35 secondes</option>
+                  <option value="40">40 secondes</option>
+                  <option value="45">45 secondes</option>
+                  <option value="50">50 secondes</option>
+                  <option value="55">55 secondes</option>
+                  <option value="60">60 secondes</option>
                 </Form.Control>
               </Form.Group>
 
